@@ -1,27 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+html, body {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* styles/globals.css */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.light {
+  background-color: white; /* Cor de fundo para o modo claro */
+  color: black; /* Cor do texto para o modo claro */
+}
+
+.dark {
+  background-color: rgb(24 24 27); /* Cor de fundo para o modo escuro */
+  color: rgb(244 244 245); /* Cor do texto para o modo escuro */
+}
+
+.transition { 
+  transition: ease 0.3s;
+}
+
+.diagonal-square {
+  background: linear-gradient(45deg, #22C55E 50%, #166534 50%);
 }
