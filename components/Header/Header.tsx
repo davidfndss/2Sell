@@ -1,10 +1,10 @@
-import TwoSellLogo from "@/components/Logo/2sellLogo";
+import TwoSellLogo from "../Logo/2SellLogo";
 import { ThemeSwitchBtn } from "../ThemeToggleBtn/ThemeSwitchBtn";
 
 export default function Header() {
   return (
     <>
-      <header className="flex items-center justify-center h-[80px] bg-white z-10 dark:bg-black">
+      <header className="flex items-center justify-center h-[80px] bg-white z-10 dark:bg-black fixed w-screen top-0">
           <article className="w-[80%] h-full flex m-auto flex items-center justify-between">
               <TwoSellLogo />
               <ThemeSwitchBtn />

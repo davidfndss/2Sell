@@ -1,12 +1,8 @@
 'use client'
 
-import { useRouter } from "next/navigation";
 import Link from "next/link"
 
 export default function CTAButton( props: { content: string, route: string } ) {
-  const router = useRouter()
-
-  console.log(props.route)
 
   return (
     <Link href={props.route} className="max-w-[250px] max-h-[60px] flex items-center justify-center rounded mt-[20px]">

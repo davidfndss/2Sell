@@ -1,5 +1,7 @@
 "use client"
 
+import Card from "@/components/Card/Card";
+import Footer from "@/components/Footer/Footer";
 import Logo from "@/components/Logo/Logo";
 import { ThemeSwitchBtn } from "@/components/ThemeToggleBtn/ThemeSwitchBtn";
 import { useSearchParams } from "next/navigation";
@@ -99,30 +101,10 @@ export default function Example() {
         <h1 className="w-full m-auto mt-[20px] font-bold font-antom tracking-tighter text-2xl">Novos produtos</h1>
 
         <section className="w-full m-auto mt-[20px] grid grid-cols-2 gap-[1vw] justify-center items-center md:grid-cols-3 lg:grid-cols-4">
-          <div className="w-full item max-w-[200px]">
-            <div className="relative border rounded-md bg-zinc-100 h-[39vw] w-[39vw] flex flex-col justify-between cursor-pointer md:h-[26vw] md:w-[26vw] lg:h-[19vw] lg:w-[19vw] max-w-[190px]">
-              <img src="assets/img/dunk.png" className="w-[90%] h-[90%] object-cover rounded-md m-auto" />
-
-              <div className="absolute top-0 w-full flex justify-end p-2">
-                <i className="bi bi-heart-fill text-black"></i>
-              </div>
-
-              <div className="absolute bottom-0 w-full flex justify-start">
-                <span className={`text-${mainColor}-500 mb-1 bg-opacity-75 px-2 rounded`}>200 R$</span>
-              </div>
-            </div>
-
-            <span className="font-montserrat font-medium mt-1 block">Item 1</span>
-
-            <div className="mt-1 flex items-center gap-1">
-              <span className="font-montserrat text-sm">
-                <i className="bi bi-geo-alt"></i>
-                Brazil
-              </span>
-              <span className="font-montserrat text-sm">•</span>
-              <span className="font-montserrat text-sm">hoje, 14:04</span>
-            </div>
-          </div>
+          <Card mainColor={mainColor} />
+          <Card mainColor={mainColor} />
+          <Card mainColor={mainColor} />
+          <Card mainColor={mainColor} />
         </section>
 
         <button className={`h-[7vh] w-full flex justify-center items-center gap-1 text-sm text-${mainColor}-500 transition hover:text-${mainColor}-400 mt-[1vh] lg:text-[16px]`}>
@@ -131,22 +113,7 @@ export default function Example() {
         </button>
       </main>
 
-      <footer className="w-[80vw] h-[20vh] max-h-[160px] mr-[10vw] ml-[10vw] text-xl flex flex-col justify-evenly mt-[1vh]">
-        <div>
-          <Logo pageName={name} color={color} icon={icon} />
-        </div>
-
-        <div>
-          <span className="text-sm text-slate-600 font-montserrat tracking-tighter font-medium">Entre em contato</span>
-          <div className={`flex gap-2 text-${mainColor}-500 text-[14px] font-medium`}>
-            <a href="https://api.whatsapp.com/send/?phone=61985391185&text&type=phone_number&app_absent=0&text=Olá" target="_blank" className={`cursor-pointer transition hover:text-${mainColor}-400`}>Whatsapp</a>
-            <a href="https://github.com/davidfndss" target="_blank" className={`cursor-pointer transition hover:text-${mainColor}-400`}>Github</a>
-            <a href="https://linkedin.com/in/davidfndss" target="_blank" className={`cursor-pointer transition hover:text-${mainColor}-400`}>Linkedin</a>
-          </div>
-        </div>
-
-        <span className="text-sm text-slate-600 font-montserrat tracking-tighter font-medium">© Techmafia 2024</span>
-      </footer>
+      <Footer pageName={name} color={mainColor} icon={icon} />
     </>
   );
 }
