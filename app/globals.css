@@ -7,19 +7,18 @@ html, body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* styles/globals.css */
 body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .light {
-  background-color: white; /* Cor de fundo para o modo claro */
-  color: black; /* Cor do texto para o modo claro */
+  background-color: white; 
+  color: black; 
 }
 
 .dark {
-  background-color: rgb(24 24 27); /* Cor de fundo para o modo escuro */
-  color: rgb(244 244 245); /* Cor do texto para o modo escuro */
+  background-color: #151515; 
+  color: rgb(244 244 245);
 }
 
 .transition { 

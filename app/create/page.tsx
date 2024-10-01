@@ -1,24 +1,19 @@
 'use client';
 
 import { useState } from "react"; 
-import Logo from "@/components/Logo/Logo";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Header from "@/components/Header/Header";
 import CTAButton from "@/components/CTAButton/CTAButton";
+import TwoSellHeader from "@/components/Header/2SellHeader";
 
 export default function Create() {
-  const router = useRouter();
-  const [name, setName] = useState(''); // Estado para o nome
-  const [color, setColor] = useState(''); // Estado para a cor
-  const [icon, setIcon] = useState(''); // Estado para o ícone
+  const [name, setName] = useState(''); 
+  const [color, setColor] = useState(''); 
+  const [icon, setIcon] = useState(''); 
 
-  // Função para gerar a URL com os parâmetros de consulta
   const generateUrl = () => {
     return `/example?name=${encodeURIComponent(name)}&color=${encodeURIComponent(color)}&icon=${encodeURIComponent(icon)}`;
   };
 
-  // Função para gerar os ícones dinamicamente
   const renderIcon = (iconName: string, iconClass: string) => {
     return (
       <i 
@@ -30,7 +25,6 @@ export default function Create() {
     );
   };
 
-  // Função para gerar os botões de cor dinamicamente
   const renderColorButton = (colorName: string, colorClass: string) => {
     return (
       <button
@@ -45,7 +39,7 @@ export default function Create() {
 
   return (
     <>
-      <Header />
+      <TwoSellHeader />
 
       <main className="w-[80vw] h-full m-auto flex flex-col gap-2">
         <form className="flex flex-col gap-3 mt-[20vh]">
@@ -57,7 +51,7 @@ export default function Create() {
               id="name" 
               placeholder="Digite aqui o nome do site..." 
               value={name} 
-              onChange={(e) => setName(e.target.value)} // Atualiza o estado ao digitar
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
 
@@ -84,7 +78,6 @@ export default function Create() {
             </div>
           </div>
 
-          {/* Passe a URL gerada para o CTAButton */}
           <CTAButton content="Criar meu site agora" route={generateUrl()} />
         </form>
       </main>

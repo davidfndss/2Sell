@@ -8,7 +8,7 @@ export function ThemeSwitchBtn() {
 
   React.useEffect(() => {
     if (!theme) {
-      setTheme('light'); // Defina um tema padrão aqui
+      setTheme('light');
     }
   }, [theme, setTheme]);
 
@@ -16,11 +16,11 @@ export function ThemeSwitchBtn() {
     <div className="text-[22px]">
       {theme === "light" ? (
         <button onClick={() => setTheme("dark")}>
-          <i className="bi bi-moon-fill text-zinc-600"></i>
+          <i className="bi bi-moon-fill text-zinc-600 transition hover:text-green-500"></i>
         </button>
       ) : (
         <button onClick={() => setTheme("light")}>
-          <i className="bi bi-sun-fill"></i>
+          <i className="bi bi-sun-fill transition hover:text-green-500"></i>
         </button>
       )}
     </div>

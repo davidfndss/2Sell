@@ -74,7 +74,7 @@ export default function Example() {
           <div className="w-[0%] h-full flex justify-end items-end text-white p-4 px-6 text-2xl font-montserrat font-bold lg:w-[50%]">
             <div className="items-center justify-center gap-1 hidden lg:flex">
               <h3 className="lg:text-2xl">Promoção de verão</h3>
-            </div>
+             </div>
           </div>
         </article>
 
