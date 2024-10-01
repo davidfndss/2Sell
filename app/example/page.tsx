@@ -15,6 +15,7 @@ export default function Example() {
   const icon = searchParams.get("icon")
 
   const [mainColor, setMainColor] = useState(color)
+  console.log(mainColor)
 
   return (
     <>
@@ -101,10 +102,10 @@ export default function Example() {
         <h1 className="w-full m-auto mt-[20px] font-bold font-antom tracking-tighter text-2xl">Novos produtos</h1>
 
         <section className="w-full m-auto mt-[20px] grid grid-cols-2 gap-[1vw] justify-center items-center md:grid-cols-3 lg:grid-cols-4">
-          <Card mainColor={mainColor} />
-          <Card mainColor={mainColor} />
-          <Card mainColor={mainColor} />
-          <Card mainColor={mainColor} />
+          <Card mainColor={mainColor} pageName={name} icon={icon} />
+          <Card mainColor={mainColor} pageName={name} icon={icon} />
+          <Card mainColor={mainColor} pageName={name} icon={icon} />
+          <Card mainColor={mainColor} pageName={name} icon={icon} />
         </section>
 
         <button className={`h-[7vh] w-full flex justify-center items-center gap-1 text-sm text-${mainColor}-500 transition hover:text-${mainColor}-400 mt-[1vh] lg:text-[16px]`}>
