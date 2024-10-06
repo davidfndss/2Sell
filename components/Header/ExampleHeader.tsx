@@ -1,21 +1,22 @@
+import CTAButton from "../Buttons/CTAButton";
 import Logo from "../Logo/Logo";
 import { ThemeSwitchBtn } from "../Buttons/ThemeToggleBtn/ThemeSwitchBtn";
 
 type Color = "green" | "blue" | "purple" | "red" | "orange" | "yellow";
 
-export default function Header(props: {mainColor: Color, icon: string | null, pageName: string | null}) {
+export default function ExampleHeader(props: {mainColor: Color, icon: string | null, pageName: string | null}) {
 
     return (
         <header className="min-w-screen flex flex-col justify-between items-center fixed top-0 bg-white z-10 dark:bg-black">
             <article className={`bg-${props.mainColor}-800 w-screen h-[5vh] max-h-[35px] flex justify-center items-center text-white tracking-tight text-sm`}>
                 <div className="flex justify-center items-center w-[80vw] sm:justify-between max-w-[1000px]">
-                    <nav className={`hidden cursor-pointer transition hover:text-${props.mainColor}-400 sm:block`}>
+                    <nav className={`hidden cursor-pointer transition hover:text-green-500 sm:block`}>
                     Suporte
                     </nav>
                     <nav className="text-center">
                     30% de desconto para novos usuários{" "}
                     </nav>
-                    <nav className={`hidden cursor-pointer transition hover:text-${props.mainColor}-400 sm:block`}>
+                    <nav className={`hidden cursor-pointer transition hover:text-green-500 sm:block`}>
                     Brasil <i className="bi bi-chevron-down"></i>
                     </nav>
                 </div>
@@ -40,14 +41,9 @@ export default function Header(props: {mainColor: Color, icon: string | null, pa
                     </div>
 
                     <div className="flex gap-3 text-lg gap-[3vw] items-center w-[20vw] max-w-[200px] justify-end">
-
-                        <nav className="font-antom flex items-center cursor-pointer w-[25px]">
-                            <i className={`bi bi-cart-fill text-2xl transition hover:text-${props.mainColor}-500 dark:hover:text-${props.mainColor}-400`}></i>
-                            <i className={`bi bi-circle-fill text-[9px] text-${props.mainColor}-400 relative right-[7px] bottom-[9px]`}></i>
-                        </nav>
-                        <nav className="font-antom flex items-center cursor-pointer">
-                            <i className={`bi bi-person-fill text-2xl transition hover:text-${props.mainColor}-400 dark:hover:text-${props.mainColor}-400`}></i>
-                        </nav>
+                        {/* <button className={`bg-${props.mainColor}-800 py-2 w-[150px] rounded-full hidden md:block`}>
+                            Salvar site
+                        </button> */}
 
                         <ThemeSwitchBtn color={props.mainColor} />
                     </div>

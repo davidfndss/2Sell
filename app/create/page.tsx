@@ -1,16 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import CTAButton from "@/components/CTAButton/CTAButton";
+import CTAButton from "@/components/Buttons/CTAButton";
 import TwoSellHeader from "@/components/Header/2SellHeader";
 import Logo from "@/components/Logo/Logo";
+type Color = "green" | "blue" | "purple" | "red" | "orange" | "yellow";
 
 export default function Create() {
   const [name, setName] = useState("");
   const [color, setColor] = useState<Color>("green");
   const [icon, setIcon] = useState("");
-  type Color = "green" | "blue" | "purple" | "red" | "orange" | "yellow";
 
   const generateUrl = () => {
     return `/example?name=${encodeURIComponent(
@@ -47,20 +46,21 @@ export default function Create() {
     <>
       <TwoSellHeader />
 
-      <main className="w-[80vw] h-full m-auto flex flex-col gap-2">
+      <main className="w-[80vw] h-full m-auto flex flex-col gap-2 max-w-[1000px]">
         <form className="flex flex-col gap-3 mt-[20vh]">
           <div>
             <label
               className="text-green-500 text-[20px] font-monserrat tracking-tight text-[600]"
               htmlFor="name"
             >
-              Name:{" "}
+              Nome:{" "}
             </label>
             <input
               className="text-[20px] px-2 rounded dark:bg-zinc-900"
               type="text"
               id="name"
               placeholder="Digite aqui o nome do site..."
+              maxLength={10}
               value={name}
               onChange={(e) => setName(e.target.value)}
             />

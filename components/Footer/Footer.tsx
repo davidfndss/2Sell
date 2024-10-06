@@ -2,7 +2,7 @@
 
 import Logo from "../Logo/Logo";
 
-type Color = 'green' | 'blue' | 'purple' | 'red' | 'orange' | 'yellow';
+type Color = "green" | "blue" | "purple" | "red" | "orange" | "yellow";
 
 const colorClasses: Record<Color, { text: string; hover: string }> = {
   green: {
@@ -35,7 +35,7 @@ export default function Footer(props: { pageName: string | null; color: Color | 
   const mainColor = props.color || 'green'; 
 
   return (
-    <footer className="w-[80vw] h-[20vh] max-h-[160px] mr-[10vw] ml-[10vw] text-xl flex flex-col justify-evenly mt-[1vh]">
+    <footer className="w-[80vw] h-[20vh] max-h-[160px] m-auto text-xl flex flex-col justify-evenly mt-[1vh] max-w-[1000px]">
       <div>
         <Logo pageName={props.pageName} color={mainColor} icon={props.icon} />
       </div>

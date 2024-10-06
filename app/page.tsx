@@ -18,7 +18,7 @@ export default function Home() {
         src="/images/responsive-mock.png"
       ></img>
 
-      <main className="w-[80vw] h-full m-auto">
+      <main className="w-[80vw] h-full m-auto max-w-[1000px]">
         <section className="flex flex-col w-full">
           <h1 className="font-monserrat text-zinc-700 font-[600] tracking-tight text-4xl mt-[20vh] dark:text-green-500">
             Seu e-commerce em alguns cliques.
@@ -41,7 +41,7 @@ export default function Home() {
           </Link>
         </section>
 
-        <section className="mt-[90vh] flex flex-col gap-10 md:mt-[140vh] md:flex-row md:justify-between">
+        <section className="mt-[90vh] flex flex-col gap-10 lg:mt-[140vh] lg:flex-row lg:justify-between">
           <article className="flex flex-col gap-10">
             <div className="font-monserrat max-w-[490px]">
               <h2 className="text-zinc-700 dark:text-zinc-100 text-[22px] font-bold md:text-2xl">
@@ -79,7 +79,7 @@ export default function Home() {
 
           <article className="flex flex-col justify-center items-center gap-4 md:mr-[10vw]">
             <div
-              className="bg-green-100 h-[180px] w-[180px] rounded-lg flex justify-center items-center border border-green-300 mt-[20vh] cursor-pointer transition text-green-500 hover:bg-green-50 hover:text-green-400 hover:border-2 md:mt-0 dark:bg-zinc-800 dark:border-zinc-700"
+              className="bg-green-100 h-[180px] w-[180px] rounded-lg flex justify-center items-center border border-green-300 mt-[20vh] cursor-pointer transition text-green-500 hover:bg-green-50 hover:text-green-400 hover:border-2 lg:mt-0 dark:bg-zinc-800 dark:border-zinc-700"
               onClick={() => router.push("/create")}
             >
               <i className="bi bi-cash-coin text-[100px] relative top-[10px]"></i>
@@ -108,28 +108,28 @@ export default function Home() {
           <div className="flex items-center">
             <i className="bi bi-plus text-green-500 text-3xl"></i>
             <i className="bi bi-cash-stack text-green-500 text-4xl mr-2"></i>
-            <h1 className="text-4xl font-bold">Venda mais</h1>
+            <h1 className="text-4xl font-bold md:text-5xl">Venda mais</h1>
           </div>
 
-          <p className="text-lg text-zinc-400">
+          <p className="text-lg text-zinc-500 max-w-[600px] md:text-xl dark:text-zinc-400">
             Desde produtos pessoais até E-commerces de grande porte, 2Sell te dá
             o poder de anunciar seus produtos de maneira simples e eficaz.
           </p>
         </article>
 
-        <article className="mt-[10vh] flex flex-col gap-10">
+        <article className="mt-[10vh] grid grid-col gap-10 transiton md:grid-cols-3 md:items-start">
           <div className="flex justify-center flex-col gap-2">
             <i className="bi bi-palette text-green-500 text-4xl mr-2"></i>
             <span className="text-xl">Personalize</span>
-            <p className="text-lg text-zinc-400">
+            <p className="text-lg text-zinc-500 md:text-[16px] md:leading-tight lg:text-lg lg:leading-md dark:text-zinc-400">
               Escolha as cores do seu site, assim como a logo, o domínio, e as
-              formas de contato
+              formas de contato.
             </p>
           </div>
           <div className="flex justify-center flex-col gap-2">
             <i className="bi bi-pencil-square text-green-500 text-4xl mr-2"></i>
             <span className="text-xl">Edite</span>
-            <p className="text-lg text-zinc-400">
+            <p className="text-lg text-zinc-500 md:text-[16px] md:leading-tight lg:text-lg lg:leading-md dark:text-zinc-400">
               Altere seu site instantaneamente, perceba a facilidade dos seus
               clientes navegarem no seu catálogo de produtos.
             </p>
@@ -137,7 +137,7 @@ export default function Home() {
           <div className="flex justify-center flex-col gap-2">
             <i className="bi bi-graph-up text-green-500 text-4xl mr-2"></i>
             <span className="text-xl">Otimizado para performance</span>
-            <p className="text-lg text-zinc-400">
+            <p className="text-lg text-zinc-500 md:text-[16px] md:leading-tight lg:text-lg lg:leading-md dark:text-zinc-400">
               Sites publicados pelo 2Sell são rápidos, adaptados para uso em
               celulares, e com SEO otimizado, sem ter que fazer nenhuma
               configuração.
@@ -145,11 +145,11 @@ export default function Home() {
           </div>
         </article>
 
-        <article className="mt-[15vh] flex flex-col gap-2 mb-[-10vh]">
-          <h1 className="text-3xl font-bold">Chegou a sua hora de vender.</h1>
+        <article className="mt-[15vh] flex flex-col gap-2 mb-[-10vh] md:items-center">
+          <h1 className="text-3xl font-bold lg:text-5xl">Chegou a sua hora de vender.</h1>
 
           <button
-            className="bg-green-500 py-2 px-6 rounded text-white mt-[10px] text-[20px] max-w-[250px] cursor-pointer transition hover:bg-green-400"
+            className="bg-green-500 py-2 px-6 rounded text-white mt-[10px] text-[20px] max-w-[250px] cursor-pointer transition hover:bg-green-400 lg:max-w-[300px] lg:w-full lg:text-2xl lg:mt-[20px] lg:font-bold"
             onClick={() => router.push("/create")}
           >
             Criar meu site

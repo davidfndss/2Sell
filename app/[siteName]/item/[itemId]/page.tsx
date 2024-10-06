@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import ScrollButton from "@/components/Buttons/ScrollButton";
 import Footer from "@/components/Footer/Footer";
+import ShareBtn from "@/components/Buttons/ShareBtn/ShareBtn";
 
 type Color = "green" | "blue" | "purple" | "red" | "orange" | "yellow";
 
@@ -31,7 +32,7 @@ export default function ItemPage() {
   return (
     <>
       <Header pageName={name} icon={icon} mainColor={mainColor} />
-      <main className="mt-[115px] w-[80vw] m-auto mb-[20vh] max-w-[1000px]">
+      <main className="mt-[115px] w-[80vw] m-auto mb-[10vh] max-w-[1000px]">
         <section className="w-full h-[60vw] bg-zinc-100 rounded flex justify-between items-end lg:h-[30vw] dark:bg-zinc-800 dark:border dark:border-zinc-700">
           <img
             src="/images/dunk.png"
@@ -62,13 +63,14 @@ export default function ItemPage() {
             </h1>
           </div>
 
-          <div className="w-[20%] text-xl flex gap-2 justify-end mt-2 pr-1">
+          <div className="w-[20%] text-xl flex gap-4 justify-end mt-2 pr-1">
             <i
               className={`bi bi-heart cursor-pointer hover:text-${mainColor}-500 transition`}
             ></i>
             <i
               className={`bi bi-share cursor-pointer hover:text-${mainColor}-500 transition`}
             ></i>
+            <ShareBtn url={`localhost:3000/${name}/item/${itemId}`} />
           </div>
         </article>
 
@@ -92,22 +94,24 @@ export default function ItemPage() {
           <span className="font-montserrat">05/09/2024</span>
         </div>
 
+        <button
+          className={`w-[80vw] bg-${mainColor}-500 bottom-0 h-[7vh] text-white text-2xl font-montserrat font-medium tracking-tight rounded-lg flex justify-center items-center m-auto mt-6 mb-2 transition hover:bg-black hover:text-white max-w-[1000px]`}
+        >
+          <i className="bi bi-whatsapp mr-2"></i>
+          Enviar mensagem
+        </button>
+
         {/* <button
           className={`w-[70vw] bg-${mainColor}-500 fixed bottom-0 h-[7vh] text-white text-2xl font-montserrat font-medium tracking-tight rounded-full flex justify-center items-center m-auto right-[15vw] left-[15vw] mb-2 transition hover:bg-black hover:text-white`}
         >
           <i className="bi bi-whatsapp mr-2"></i>
           Enviar mensagem
         </button> */}
-        <ScrollButton mainColor={mainColor}  />
-
-        <Footer pageName={name} color={mainColor} icon={icon} />
-
-        <div className="m-auto w-[80vw] max-w-[1000px] mt-[20px] mb-[10px]">
-          <button className={`bg-${mainColor}-800 text-white py-3 w-full rounded-xl transition hover:bg-black text-xl`} onClick={() => router.push("/signup") }>
-            Salvar este site
-          </button>
-        </div>
       </main>
+
+      <div className="mb-[10vh]">
+        <Footer color={mainColor} pageName={name} icon={icon} />
+      </div>
     </>
   );
 }

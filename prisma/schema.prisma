@@ -20,7 +20,7 @@ model Owner {
 
 model Site {
   id        String    @id @map("_id") @default(auto()) @db.ObjectId
-  name      String
+  name      String    @unique
   color     String
   icon      String
   tags      String[]

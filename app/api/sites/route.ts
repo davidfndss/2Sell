@@ -21,7 +21,27 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET() {
-  const sites = await prisma.site.findMany();
-  return NextResponse.json(sites, { status: 200 });
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const site = searchParams.get('site');
+  console.log(site)
+
+  try {
+    if (site) {
+      console.log("site: ", site);
+      const siteFound = await prisma.site.findUnique({
+        where: { name: site },
+      });
+
+      if (!siteFound) {
+        return NextResponse.json({ error: 'Site not found' }, { status: 404 });
+      }
+
+      return NextResponse.json(siteFound, { status: 200 });
+    } else {
+      return NextResponse.json({"message": "site not found"}, { status: 200 });
+    }
+  } catch (error) {
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+  }
 }

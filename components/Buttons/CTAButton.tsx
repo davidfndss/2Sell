@@ -4,6 +4,7 @@ import Link from "next/link"
 
 export default function CTAButton( props: { content: string, route: string, color?: string} ) {
 
+
   if (props.color) {
     return (
       <Link href={props.route} className="max-w-[250px] max-h-[60px] flex items-center justify-center rounded mt-[20px]">
