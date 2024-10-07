@@ -189,7 +189,7 @@ const signup = () => {
             
           </form>
           <p className="text-zinc-600 dark:text-zinc-400 text-center mt-[10px]">Já possui uma conta? 
-            <span className={`text-${mainColor}-500 cursor-pointer transition hover:text-black dark:hover:text-white ml-1`}>Entrar</span>
+            <span className={`text-${mainColor}-500 cursor-pointer transition hover:text-black dark:hover:text-white ml-1`} onClick={() => router.push("/signin")}>Entrar</span>
           </p>
         </div>
       </main>

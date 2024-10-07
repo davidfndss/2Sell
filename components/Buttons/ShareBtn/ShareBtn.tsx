@@ -1,21 +1,29 @@
-// components/ShareButton.tsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 type ShareButtonProps = {
-  url: string;  // O link a ser compartilhado
+  url: string;
+  mainColor: string | null;
 };
 
-const ShareBtn: React.FC<ShareButtonProps> = ({ url }) => {
+const ShareButton: React.FC<ShareButtonProps> = (props: { url: string, mainColor: string | null }) => {
   const [copied, setCopied] = useState(false);
+  const [isClipboardSupported, setIsClipboardSupported] = useState(false);
+  const [isShareSupported, setIsShareSupported] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setIsClipboardSupported(!!navigator.clipboard);
+      setIsShareSupported(!!navigator.share);
+    }
+  }, []);
 
   const handleShare = async () => {
-    if (navigator.share) {
+    if (isShareSupported) {
       try {
         await navigator.share({
           title: 'Compartilhe este link',
-          url: url,
+          url: props.url,
         });
-        console.log('Compartilhamento bem-sucedido');
       } catch (error) {
         console.error('Erro ao compartilhar:', error);
       }
@@ -25,23 +33,23 @@ const ShareBtn: React.FC<ShareButtonProps> = ({ url }) => {
   };
 
   const handleCopyToClipboard = () => {
-    navigator.clipboard.writeText(url).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);  // Reverte o estado depois de 2 segundos
-    });
+    if (isClipboardSupported) {
+      navigator.clipboard.writeText(props.url).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      });
+    } else {
+      console.error('API Clipboard não suportada no navegador.');
+    }
   };
 
   return (
-    <div className="flex items-center space-x-2">
-      <button
-        onClick={handleShare}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Compartilhar
-      </button>
-      {copied && <span className="text-green-500 text-sm">Link copiado!</span>}
-    </div>
+    <button onClick={handleShare}>
+          <i
+          className={`bi bi-share cursor-pointer hover:text-${props.mainColor}-500 transition`}
+          ></i>
+    </button>
   );
 };
 
-export default ShareBtn;
+export default ShareButton;

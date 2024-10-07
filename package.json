@@ -11,6 +11,7 @@
   "dependencies": {
     "@prisma/client": "^5.20.0",
     "bootstrap-icons": "^1.11.3",
+    "jsonwebtoken": "^9.0.2",
     "next": "14.2.13",
     "next-themes": "^0.3.0",
     "react": "^18",

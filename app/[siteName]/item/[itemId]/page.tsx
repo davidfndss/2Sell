@@ -4,7 +4,6 @@ import Header from "@/components/Header/Header";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
-import ScrollButton from "@/components/Buttons/ScrollButton";
 import Footer from "@/components/Footer/Footer";
 import ShareBtn from "@/components/Buttons/ShareBtn/ShareBtn";
 
@@ -67,10 +66,7 @@ export default function ItemPage() {
             <i
               className={`bi bi-heart cursor-pointer hover:text-${mainColor}-500 transition`}
             ></i>
-            <i
-              className={`bi bi-share cursor-pointer hover:text-${mainColor}-500 transition`}
-            ></i>
-            <ShareBtn url={`localhost:3000/${name}/item/${itemId}`} />
+            <ShareBtn url={`http://localhost:3000/${name}/item/${itemId}`} mainColor={color}/>
           </div>
         </article>
 
