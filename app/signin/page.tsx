@@ -3,16 +3,14 @@
 import TwoSellLogo from '@/components/Logo/2SellLogo';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { setCookie } from 'typescript-cookie';
 
 const signup = () => {
   const searchParams = useSearchParams();
 
-  const [ownerData, setOwnerData] = useState({ name: '', email: '', password: '', phone: '' });
+  const [ownerData, setOwnerData] = useState({ email: '', password: '' });
   
-  const [ownerCreateResponseMessage, setOwnerCreateResponseMessage] = useState('');
-
   const router = useRouter();
-
 
   const handleOwnerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOwnerData({ ...ownerData, [e.target.name]: e.target.value });
@@ -21,25 +19,26 @@ const signup = () => {
   const handleSubmitOwner = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/owners', {
+      const response = await fetch('/api/auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(ownerData),
       });
       const result = await response.json();
-      setOwnerCreateResponseMessage(JSON.stringify(result));
+      setCookie("atk", result.atk);
+      router.push("/dashboard")
     } catch (error: unknown) {
       if (error instanceof Error) {
-        setOwnerCreateResponseMessage(`Error creating owner: ${error.message}`);
+        console.error(`Error creating owner: ${error.message}`);
       } else {
-        setOwnerCreateResponseMessage('Error creating owner');
+        console.error('Error creating owner');
       }
     }
   };
 
   return (
     <>
-      <main className="flex flex-col items-center p-5 min-h-screen mt-[80px] w-[80vw] max-w-[500px] m-auto">
+      <main className="flex flex-col items-center p-5 min-h-screen mt-[80px] w-[80vw] max-w-[500px] m-auto md:max-w-[550px]">
 
         <article className="mt-[20px] mb-[10px] flex flex-col gap-2">
               <div
@@ -52,8 +51,7 @@ const signup = () => {
               </div>
 
             <div className="flex items-center ml-[-10px]">
-              <i className={`bi bi-person-circle text-green-500 text-3xl mr-2`}></i>
-              <h1 className="text-3xl font-bold md:text-5xl">Entre na sua conta</h1>
+              <h1 className="text-3xl font-medium tracking-tight md:text-4xl">Entre na sua conta</h1>
             </div>
         </article>
 

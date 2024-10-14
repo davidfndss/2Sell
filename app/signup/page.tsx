@@ -2,6 +2,7 @@
 
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { setCookie } from 'typescript-cookie';
 
 type Color = "green" | "blue" | "purple" | "red" | "orange" | "yellow";
 
@@ -105,8 +106,8 @@ const signup = () => {
         }),
       });
       const result = await response.json();
-      setSiteCreateResponseMessage(JSON.stringify(result));
-      router.push(`/${name}`)
+      setCookie("atk", result.atk);
+      router.push(`/dashboard`)
     } catch (error: unknown) {
       if (error instanceof Error) {
         setSiteCreateResponseMessage(`Error creating site: ${error.message}`);
@@ -127,9 +128,11 @@ const signup = () => {
               <h1 className="text-3xl font-bold md:text-5xl">Crie uma conta</h1>
             </div>
 
-            <p className="text-lg text-zinc-500 max-w-[600px] md:text-xl dark:text-zinc-400">
+            { !color || !name || !icon ? (<p className="text-lg text-zinc-500 max-w-[600px] md:text-xl dark:text-zinc-400">
+              Uma conta no 2Sell te permitirá criar e gerenciar seus sites livremente.
+            </p>) : (<p className="text-lg text-zinc-500 max-w-[600px] md:text-xl dark:text-zinc-400">
               Uma conta no 2Sell te permitirá criar e gerenciar seus sites livremente, inclusive o <i className={`bi bi-${icon} text-${mainColor}-500`}></i><span className="text-black tracking-tight dark:text-white">{name}</span>.
-            </p>
+            </p>) }
         </article>
 
         <div className="w-[80vw] max-w-[500px] p-6 rounded-lg">

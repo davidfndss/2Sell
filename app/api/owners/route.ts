@@ -5,17 +5,19 @@ import { z } from 'zod';
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 
+
 const prisma = new PrismaClient();
 
-export async function POST(request: Request) { 
+export async function POST(req: Request) { 
   const generateToken = (id: string) => jwt.sign({ id: id }, process.env.SECRET_JWT, { expiresIn: 86400 });
+  console.log(process.env.SECRET_JWT)
 
   try {
-    const body = await request.json();
+    const body = await req.json();
     const validatedOwner = ownerSchema.parse(body);
 
     const foundUser = await prisma.owner.findUnique({where: {email: body.email}})
-    if (foundUser) return NextResponse.json({message: "E-mail já cadastrado"},{status: 400})
+    if (foundUser) return NextResponse.json({message: "E-mail already registered"},{status: 400})
 
     const hashedPassword = await bcrypt.hash(body.password, 7)
     const newOwner = await prisma.owner.create({
@@ -34,7 +36,11 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET() {
-  const owners = await prisma.owner.findMany();
+export async function GET(req: Request) {
+  const id = await Cookies.get("id")
+  jwt.decode(id)
+  
+
+  const owners = await prisma.owner.findUnique({where: {id: id}});
   return NextResponse.json(owners, { status: 200 });
 }

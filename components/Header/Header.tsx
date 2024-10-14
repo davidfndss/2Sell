@@ -49,6 +49,8 @@ export default function Header(props: {mainColor: Color, icon: string | null, pa
                             <i className={`bi bi-person-fill text-2xl transition hover:text-${props.mainColor}-400 dark:hover:text-${props.mainColor}-400`}></i>
                         </nav>
 
+                        
+
                         <ThemeSwitchBtn color={props.mainColor} />
                     </div>
                 </div>
