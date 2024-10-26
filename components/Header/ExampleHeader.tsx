@@ -10,13 +10,13 @@ export default function ExampleHeader(props: {mainColor: Color, icon: string | n
         <header className="min-w-screen flex flex-col justify-between items-center fixed top-0 bg-white z-10 dark:bg-black">
             <article className={`bg-${props.mainColor}-800 w-screen h-[5vh] max-h-[35px] flex justify-center items-center text-white tracking-tight text-sm`}>
                 <div className="flex justify-center items-center w-[80vw] sm:justify-between max-w-[1000px]">
-                    <nav className={`hidden cursor-pointer transition hover:text-green-500 sm:block`}>
+                    <nav className={`hidden cursor-pointer transition hover:text-${props.mainColor}-500 sm:block`}>
                     Suporte
                     </nav>
                     <nav className="text-center">
                     30% de desconto para novos usuários{" "}
                     </nav>
-                    <nav className={`hidden cursor-pointer transition hover:text-green-500 sm:block`}>
+                    <nav className={`hidden cursor-pointer transition hover:text-${props.mainColor}-500 sm:block`}>
                     Brasil <i className="bi bi-chevron-down"></i>
                     </nav>
                 </div>
@@ -41,10 +41,6 @@ export default function ExampleHeader(props: {mainColor: Color, icon: string | n
                     </div>
 
                     <div className="flex gap-3 text-lg gap-[3vw] items-center w-[20vw] max-w-[200px] justify-end">
-                        {/* <button className={`bg-${props.mainColor}-800 py-2 w-[150px] rounded-full hidden md:block`}>
-                            Salvar site
-                        </button> */}
-
                         <ThemeSwitchBtn color={props.mainColor} />
                     </div>
                 </div>

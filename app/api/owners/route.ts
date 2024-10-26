@@ -10,7 +10,6 @@ const prisma = new PrismaClient();
 
 export async function POST(req: Request) { 
   const generateToken = (id: string) => jwt.sign({ id: id }, process.env.SECRET_JWT, { expiresIn: 86400 });
-  console.log(process.env.SECRET_JWT)
 
   try {
     const body = await req.json();
@@ -31,7 +30,6 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: error.errors }, { status: 400 });
     }
 
-    console.log( error instanceof Error ? error.message : null)
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }

@@ -106,7 +106,7 @@ export default function Example() {
 
       <div className="m-auto w-[80vw] max-w-[1000px] mt-[20px] mb-[10px]">
         <button className={`${colorClasses[mainColor].bg} py-3 w-full rounded-xl transition hover:bg-black text-xl text-white`} onClick={() => router.push(`/signup?name=${name}&color=${mainColor}&icon=${icon}`)}>
-          Salvar este site
+          Prosseguir
         </button>
       </div>
     </>

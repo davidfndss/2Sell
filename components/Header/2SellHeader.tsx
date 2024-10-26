@@ -15,7 +15,7 @@ export default function TwoSellHeader() {
 
               <div className="flex gap-6 items-center">
                 <nav className="transition cursor-pointer hover:text-green-500" onClick={() => router.push("signin") }>
-                  Account
+                  Conta
                 </nav>
                 <ThemeSwitchBtn color="green" />
               </div>

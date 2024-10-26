@@ -4,40 +4,40 @@ import { useRouter } from "next/navigation";
 
 type Color = "green" | "blue" | "purple" | "red" | "orange" | "yellow";
 
-const colorClasses: Record<Color, { text: string; hover: string; darkHover: string }> = {
+const colorClasses: Record<Color, { text: string; hover: string; darkHover: string; lg?: boolean }> = {
   green: {
-    text: 'text-green-400',
-    hover: 'hover:text-green-500',
+    text: 'text-green-500',
+    hover: 'hover:text-green-400',
     darkHover: 'dark:hover:text-green-500'
   },
   blue: {
-    text: 'text-blue-400',
-    hover: 'hover:text-blue-500',
+    text: 'text-blue-500',
+    hover: 'hover:text-blue-400',
     darkHover: 'dark:hover:text-blue-500'
   },
   purple: {
-    text: 'text-purple-400',
+    text: 'text-purple-500',
     hover: 'hover:text-purple-400',
     darkHover: 'dark:hover:text-purple-400'
   },
   red: {
-    text: 'text-red-400',
+    text: 'text-red-500',
     hover: 'hover:text-red-400',
     darkHover: 'dark:hover:text-red-400'
   },
   orange: {
-    text: 'text-orange-400',
+    text: 'text-orange-500',
     hover: 'hover:text-orange-400',
     darkHover: 'dark:hover:text-orange-400'
   },
   yellow: {
-    text: 'text-yellow-400',
+    text: 'text-yellow-500',
     hover: 'hover:text-yellow-400',
     darkHover: 'dark:hover:text-yellow-400'
   },
 };
 
-export default function Logo(props: { icon: string | null, pageName: string | null, color: Color | null, path?: string }) {
+export default function Logo(props: { icon: string | null, pageName: string | null, color: Color | null, path?: string, lg?: boolean }) {
     const router = useRouter();
 
     const colorKey = props.color as Color;
@@ -48,7 +48,7 @@ export default function Logo(props: { icon: string | null, pageName: string | nu
     return (
       <button
         id="logo"
-        className={`font-black font-montserrat cursor-pointer transition ${hoverColorClass} dark:text-white ${darkHoverColorClass} max-w-[140px]`}
+        className={`font-black font-montserrat cursor-pointer transition ${hoverColorClass} dark:text-white ${darkHoverColorClass} max-w-[140px] ${props.lg ? "text-[30px] max-w-[200px]" : ""}`}
         onClick={() => router.push( props.path ? props.path : "/")}
       >
         <i className={`bi bi-${props.icon} ${textColorClass} pr-[2px]`}></i>

@@ -24,7 +24,7 @@ const generateBackground = (color: Color, isMdUp: boolean) => {
   } else {
     switch (color) {
       case 'green':
-        return '#22C55E'; // Cor mais clara
+        return '#22C55E'; 
       case 'blue':
         return '#3B82F6';
       case 'purple':
@@ -43,9 +43,11 @@ const generateBackground = (color: Color, isMdUp: boolean) => {
 
 interface GradientBoxProps {
   color: Color;
+  text1?: string;
+  text2?: string;
 }
 
-const GradientBox: React.FC<GradientBoxProps> = ({ color }) => {
+const GradientBox: React.FC<GradientBoxProps> = ({ color, text1, text2 }) => {
   const [isMdUp, setIsMdUp] = React.useState<boolean>(false);
 
   React.useEffect(() => {
@@ -70,16 +72,35 @@ const GradientBox: React.FC<GradientBoxProps> = ({ color }) => {
         style={backgroundStyle}
       >
         <div className="w-[100%] h-full flex flex-col justify-center text-white p-4 text-2xl font-montserrat lg:w-[50%]">
-            <h3>Até</h3>
-            <h3 className="font-bold lg:text-3xl">70% de desconto</h3>
+            {
+              text1 == "Até 70% de desconto" 
+              ? (
+                <>
+                  <h3>Até</h3>
+                  <h3 className="font-bold lg:text-3xl">70% de desconto</h3>
+                </>
+              )
+              : (<h3 className="font-bold lg:text-3xl">{text1}</h3>) 
+            }
+            
             <button className={`w-[200px] text-lg rounded-full bg-white text-${color}-500 font-bold mt-2 py-1 transition hover:bg-zinc-900 hover:text-white`}>
               Comprar agora
             </button>
           </div>
           <div className="w-[0%] h-full flex justify-end items-end text-white p-4 px-6 text-2xl font-montserrat font-bold lg:w-[50%]">
             <div className="items-center justify-center gap-1 hidden lg:flex">
-              <h3 className="lg:text-2xl">Promoção de verão</h3>
-              <SunEmoji />
+              {
+                text2 == "Promoção de verão" 
+                  ? (
+                    <>
+                      <h3 className="lg:text-2xl">Promoção de verão</h3>
+                      <SunEmoji />
+                    </>
+                  )
+                  : (
+                    <h3 className="lg:text-2xl">{text2}</h3>
+                  )
+              }
             </div>
           </div>
       </article>

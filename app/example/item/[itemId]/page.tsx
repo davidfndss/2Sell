@@ -104,7 +104,7 @@ export default function ItemPage() {
 
         <div className="m-auto w-[80vw] max-w-[1000px] mt-[20px] mb-[10px]">
           <button className={`bg-${mainColor}-800 text-white py-3 w-full rounded-xl transition hover:bg-black text-xl`} onClick={() => router.push("/signup") }>
-            Salvar este site
+            Prosseguir
           </button>
         </div>
       </main>
