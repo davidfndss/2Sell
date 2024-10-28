@@ -23,6 +23,11 @@ model Site {
   name      String    @unique
   color     String
   icon      String
+  useTopHeader Boolean @default(true)
+  useGradientBox Boolean @default(true)
+  useTags   Boolean @default(true)
+  topHeaderText String
+  gradientBoxText String[]
   tags      String[]
   ownerId   String    @db.ObjectId
   owner     Owner     @relation(fields: [ownerId], references: [id])

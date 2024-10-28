@@ -4,7 +4,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import Logo from "@/components/Logo/Logo";
 import { getCookie } from 'typescript-cookie';
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import TwoSellHeader from "@/components/Header/2SellHeader";
 import GradientBox from "@/components/GradientBox/GradientBox";
 import ExampleHeader from "@/components/Header/ExampleHeader";
@@ -76,7 +76,8 @@ export default function EcommerceFinalSteps() {
     );
   }
 
-  const ownerId = jwt.decode(atk).id;
+  const decodedToken = jwt.decode(atk)
+  const ownerId = (decodedToken as JwtPayload)?.id ?? '';
 
   const [siteData, setSiteData] = useState({ name: name, color: color, icon: icon, tags: '', ownerId: ownerId });
 
@@ -97,6 +98,7 @@ export default function EcommerceFinalSteps() {
         }),
       });
       const result = await response.json();
+      router.push(`${name}/site-created`)
     } catch (error: unknown) {
       setSiteCreateErrorResponseMessage(`Erro ao criar site: ${error instanceof Error ? error.message : 'Tente novamente mais tarde.'}`);
     }
@@ -131,7 +133,7 @@ export default function EcommerceFinalSteps() {
     <main className="mt-[20vh] w-[80vw] max-w-[1000px] m-auto">
       <div className="flex flex-col justify-center items-start gap-4">
         <Logo pageName={name} color={mainColor} icon={icon} lg={true} path={`/final-steps?name=${name}&color=${color}&icon=${icon}`} />
-        <h1>Faremos os <span className={`${colorClasses[mainColor].text}`}>ajustes finais</span> na personalização do seu site, ok?</h1>
+        <h1>Faremos os <span className={`${colorClasses[mainColor].text}`}>ajustes finais</span> da personalização do seu site, ok?</h1>
         {SiteCreateErrorResponseMessage && <span className="text-red-500">{SiteCreateErrorResponseMessage}</span>}
 
 

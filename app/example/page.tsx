@@ -3,11 +3,12 @@
 import Card from "@/components/Card/ExampleCard";
 import Footer from "@/components/Footer/Footer";
 import { useSearchParams, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GradientBox from "@/components/GradientBox/GradientBox";
 import ExampleHeader from "@/components/Header/ExampleHeader";
 import ScrollButton from "@/components/Buttons/ScrollButton";
 import ExampleCard from "@/components/Card/ExampleCard";
+import { getCookie } from "typescript-cookie";
 
 type Color = "green" | "blue" | "purple" | "red" | "orange" | "yellow";
 
@@ -52,8 +53,14 @@ export default function Example() {
   const icon = searchParams.get("icon");
 
   const [mainColor, setMainColor] = useState<Color>(color);
+  const [atk, setAtk] = useState<string | undefined>()
 
   const router = useRouter()
+
+  useEffect(() => {
+    setAtk(getCookie("atk"))
+  }, [])
+
 
   return (
     <>
@@ -105,7 +112,7 @@ export default function Example() {
 
 
       <div className="m-auto w-[80vw] max-w-[1000px] mt-[20px] mb-[10px]">
-        <button className={`${colorClasses[mainColor].bg} py-3 w-full rounded-xl transition hover:bg-black text-xl text-white`} onClick={() => router.push(`/signup?name=${name}&color=${mainColor}&icon=${icon}`)}>
+        <button className={`${colorClasses[mainColor].bg} py-3 w-full rounded-xl transition hover:bg-black text-xl text-white`} onClick={() => router.push( atk ? `/final-steps?name=${name}&color=${mainColor}&icon=${icon}` : `/signup?name=${name}&color=${mainColor}&icon=${icon}`)}>
           Prosseguir
         </button>
       </div>

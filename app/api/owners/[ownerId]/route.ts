@@ -20,7 +20,7 @@ export async function GET(
       );
     }
 
-    const owner = await prisma.owner.findUnique({ where: { id: ownerId } });
+    const owner = await prisma.owner.findUnique({ where: { id: ownerId }, include: { sites: true } });
 
     if (!owner) {
       return NextResponse.json({ error: 'Owner not found' }, { status: 404 });

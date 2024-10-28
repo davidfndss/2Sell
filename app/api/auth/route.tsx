@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
-import { SigninSchema } from '../../../utils/validation';
+import { SigninSchema } from '../../../utils/validation-schemas';
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 

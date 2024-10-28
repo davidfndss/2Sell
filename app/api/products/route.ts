@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
-import { productSchema } from '../../../utils/validation';
+import { productSchema } from '../../../utils/validation-schemas';
 import { z } from 'zod';
 
 const prisma = new PrismaClient();

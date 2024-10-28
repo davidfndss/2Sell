@@ -48,7 +48,7 @@ export default function Logo(props: { icon: string | null, pageName: string | nu
     return (
       <button
         id="logo"
-        className={`font-black font-montserrat cursor-pointer transition ${hoverColorClass} dark:text-white ${darkHoverColorClass} max-w-[140px] ${props.lg ? "text-[30px] max-w-[200px]" : ""}`}
+        className={`font-black font-montserrat cursor-pointer transition ${hoverColorClass} dark:text-white ${darkHoverColorClass} max-w-[140px] ${props.lg ? "text-[30px] max-w-[180px] flex" : ""}`}
         onClick={() => router.push( props.path ? props.path : "/")}
       >
         <i className={`bi bi-${props.icon} ${textColorClass} pr-[2px]`}></i>

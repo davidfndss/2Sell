@@ -1,7 +1,8 @@
 "use client";
 
-import { ownerSchema } from '@/utils/validation';
+import { ownerSchema } from '@/utils/validation-schemas';
 import { useSearchParams, useRouter } from 'next/navigation';
+import { Result } from 'postcss';
 import { useState } from 'react';
 import { setCookie } from 'typescript-cookie';
 import { ZodError } from 'zod';
@@ -60,7 +61,6 @@ const Signup = () => {
   const [siteData, setSiteData] = useState({ name: name, color: color, icon: icon, tags: '', ownerId: ownerId });
   
   const [ownerCreateErrorResponseMessage, setOwnerCreateErrorResponseMessage] = useState('');
-  const [siteCreateErrorResponseMessage, setSiteCreateErrorResponseMessage] = useState('');
 
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
 
@@ -89,14 +89,13 @@ const Signup = () => {
   
       const errorMessage = errorMessages[result.message as keyof typeof errorMessages] || result.message;
   
-      setOwnerCreateErrorResponseMessage(result.message || 'Owner created successfully');
-      
-      if (response.ok && result.id) {
-        setOwnerId(result.id);
-        await submitSite(result.id);
+      if (response.ok && result.atk) {
+        setCookie("atk", result.atk)
+        router.push( name && color && icon ? `/final-steps?name=${name}&color=${color}&icon=${icon}` : `/dashboard`)
       } else {
         setOwnerCreateErrorResponseMessage(errorMessage || 'Erro ao criar usuário');
       }
+
     } catch (error) {
 
       if (error instanceof ZodError) {
@@ -110,29 +109,6 @@ const Signup = () => {
       } else {
         setOwnerCreateErrorResponseMessage('Erro ao criar usuário');
       }
-    }
-  };
-
-  const submitSite = async (ownerId: string) => {
-    try {
-      const response = await fetch('/api/sites', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...siteData,
-          ownerId,
-          tags: siteData.tags.split(',').map(tag => tag.trim()),
-        }),
-      });
-      const result = await response.json();
-      if (response.ok) {
-        setCookie("atk", result.atk);
-        router.push(`/dashboard`);
-      } else {
-        setSiteCreateErrorResponseMessage(result.error || 'Erro ao criar site.');
-      }
-    } catch (error: unknown) {
-      setSiteCreateErrorResponseMessage(`Erro ao criar site: ${error instanceof Error ? error.message : 'Tente novamente mais tarde.'}`);
     }
   };
 
@@ -203,7 +179,6 @@ const Signup = () => {
               />
               <p className="text-zinc-700 dark:text-zinc-500 text-sm">Nós da 2sell não entraremos em contato com você pelo seu número, apenas seus clientes.</p>
               {ownerCreateErrorResponseMessage && <p className="text-red-500">{ownerCreateErrorResponseMessage}</p>}
-              {siteCreateErrorResponseMessage && <p className="text-red-500">{siteCreateErrorResponseMessage}</p>}
             </div>
             <button 
               type="submit" 

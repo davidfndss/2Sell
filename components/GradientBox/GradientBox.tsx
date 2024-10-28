@@ -83,7 +83,7 @@ const GradientBox: React.FC<GradientBoxProps> = ({ color, text1, text2 }) => {
               : (<h3 className="font-bold lg:text-3xl">{text1}</h3>) 
             }
             
-            <button className={`w-[200px] text-lg rounded-full bg-white text-${color}-500 font-bold mt-2 py-1 transition hover:bg-zinc-900 hover:text-white`}>
+            <button className={`w-[200px] text-lg rounded-full bg-white text-${color}-500 font-bold mt-2 py-1 transition hover:bg-zinc-900 hover:text-white`} onClick={() => window.scrollTo({top: 200, behavior: "smooth"})}>
               Comprar agora
             </button>
           </div>

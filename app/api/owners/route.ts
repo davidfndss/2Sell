@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
-import { ownerSchema } from '../../../utils/validation';
+import { ownerSchema } from '../../../utils/validation-schemas';
 import { z } from 'zod';
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"

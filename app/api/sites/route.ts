@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
-import { siteSchema } from '../../../utils/validation';
+import { siteSchema } from '../../../utils/validation-schemas';
 import { z } from 'zod';
 
 const prisma = new PrismaClient();
@@ -8,12 +8,15 @@ const prisma = new PrismaClient();
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+    console.log(body)
     const validatedSite = siteSchema.parse(body);
+    console.log(validatedSite)
     const newSite = await prisma.site.create({
       data: validatedSite,
     });
     return NextResponse.json(newSite, { status: 201 });
   } catch (error) {
+    console.error(error)
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.errors }, { status: 400 });
     }
