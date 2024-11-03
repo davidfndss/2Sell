@@ -2,25 +2,65 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Header from "@/components/Header/2SellHeader";
-import Footer from "@/components/Footer/Footer";
 import TwoSellFooter from "@/components/Footer/2SellFooter";
+import { ThemeSwitchBtn } from "@/components/Buttons/ThemeToggleBtn/ThemeSwitchBtn";
+import TwoSellLogo from "@/components/Logo/2SellLogo";
+import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
+import { getCookie } from "typescript-cookie";
 
 export default function Home() {
   const router = useRouter();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    setTheme("dark");
+
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
-      <Header />
+      <header className={`flex items-center justify-center  bg-white z-10 fixed w-screen top-0 transition ${ isScrolled ? "dark:bg-black h-[70px] dark:shadow-[0_4px_16px_0px_rgba(0,0,0,0.5)]" : "dark:bg-[#151515] h-[80px]"}`}>
+          <article className="w-[80%] h-full flex flex items-center justify-between max-w-[1000px] mr-[15px]">
+              <TwoSellLogo />
+
+              <div className="flex gap-4 items-center">
+              
+                <nav className="rounded py-2 px-6 border text-green-500 border-green-500 transition cursor-pointer hover:border-green-500 dark:border-zinc-700 dark:text-white dark:hover:text-green-500 dark:hover:border-green-500" onClick={() => router.push("signin") }>
+                  Entrar
+                </nav>
+                <nav className="rounded py-2 px-6 border bg-green-500 text-white transition cursor-pointer  hover:bg-green-400 dark:hover:bg-green-500 dark:border-zinc-600 dark:bg-zinc-600" onClick={() => router.push("signin") }>
+                  Criar conta
+                </nav>
+                
+              </div>
+          </article>
+      </header>
 
       <img
         className="absolute min-w-[700px] top-[80vh] right-[15vw] md:max-w-[80vw] md:right-[10vw]"
         src="/images/responsive-mock.png"
       ></img>
 
-      <main className="w-[80vw] h-full m-auto max-w-[1000px]">
+
+      <div className="absolute z-[-10] w-full max-w-[90vw] left-[10vw] top-[5vh] hidden dark:flex overflow-hidden">
+        <img src="/images/gradient-background.png" className="min-w-[1000px] max-h-[900px] relative md:min-w-[1000px] md:max-h-[1000px] md:left-[10vw] lg:w-[1300px] lg:h-[1300px] lg:left-[35vw] z-[-11]"></img>
+      </div>
+
+      {/* <img src="/images/gradient-background.png" className="min-w-[1000px] max-h-[900px] absolute z-[-10] left-[10vw] top-[5vh] hidden md:min-w-[1000px] md:max-h-[1000px] md:left-[10vw] lg:w-[1300px] lg:h-[1300px] lg:left-[35vw] border dark:flex"></img> */}
+      
+      {/* <div className="w-[1000px] h-[1000px] absolute z-[-10] left-[10vw] top-[5vh] hidden md:min-w-[1000px] md:max-h-[1000px] md:left-[10vw] lg:w-[1300px] lg:h-[1300px] lg:left-[35vw] dark:block" style={{backgroundImage: 'url("/images/gradient-background.png")', backgroundSize: "cover", backgroundRepeat: "no-repeat" }}></div> */}
+     
+
+      <main className="w-[80vw] h-full m-auto max-w-[1000px] overflow-hidden">
         <section className="flex flex-col w-full">
-          <h1 className="font-monserrat text-zinc-700 font-[600] tracking-tight text-4xl mt-[20vh] dark:text-green-500">
+          <h1 className="font-monserrat text-zinc-700 font-[600] tracking-tight text-4xl mt-[20vh] dark:text-green-500 lg:text-6xl">
             Seu e-commerce em alguns cliques.
           </h1>
           <h2 className="font-monserrat text-zinc-400 font-[600] tracking-tight text-2xl mt-[3vh] max-w-[420px]">
@@ -28,16 +68,16 @@ export default function Home() {
             de maneira rápida e fácil
           </h2>
           <button
-            className="bg-green-500 py-2 px-6 rounded text-white mt-[20px] text-[20px] max-w-[250px] cursor-pointer transition hover:bg-green-400"
+            className="bg-green-500 py-2 px-6 rounded text-white mt-[25px] text-[20px] max-w-[250px] cursor-pointer transition hover:bg-green-400 lg:text-2xl lg:font-medium font-montserrat tracking-tight"
             onClick={() => router.push("/create")}
           >
             Criar meu site
           </button>
           <Link
-            href="/example"
+            href="/dashboard"
             className="text-green-500 mt-[15px] text-[18px] font-[500] tracking-tight cursor-pointer transition hover:text-green-400"
           >
-            Como contribuir
+           Acessar o painel <i className={`bi bi-lock`}></i>
           </Link>
         </section>
 

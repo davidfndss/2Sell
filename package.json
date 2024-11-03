@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.20.0",
+    "@supabase/supabase-js": "^2.46.1",
     "@types/dotenv": "^6.1.1",
     "bcrypt": "^5.1.1",
     "bootstrap-icons": "^1.11.3",

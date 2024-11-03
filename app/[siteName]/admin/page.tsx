@@ -151,7 +151,7 @@ const HomePageAdmin = () => {
               <article className="flex justify-center items-center gap-2 font-medium text-lg py-[20vh] tracking-tight">
                 <i className={`bi bi-bag-plus text-6xl text-${siteResponse.color}-500`}></i>
                 <div>
-                  <h2 className="text-2xl font-bold text-zinc-600">Você aianda não adicionou nenhum produto</h2>
+                  <h2 className="text-2xl font-bold text-zinc-600 dark:text-zinc-300">Você ainda não adicionou nenhum produto...</h2>
                   <button className={`${colorClasses[siteResponse.color].text} cursor-pointer transition text-2xl`} onClick={() => router.push(`/${siteResponse.name}/admin/add-product`)}>Adicionar o primeiro</button>
                 </div>
               </article>

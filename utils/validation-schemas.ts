@@ -28,9 +28,12 @@ export const siteSchema = z.object({
 
 export const productSchema = z.object({
   name: z.string().min(1, 'Name is required'),
-  description: z.string().min(1, 'Description is required'),
-  price: z.string().min(1, 'Price is required'),
+  description: z.union([
+    z.string(),
+    z.number(),
+  ]),
+  price: z.number().min(0, 'Price must be a positive number'),
   tags: z.array(z.string()).optional(),
-  siteId: z.string().length(24, 'Invalid site ID'),
-  imageUrls: z.array(z.string().url()).optional()
+  siteId: z.string().length(24, 'Invalid site ID'), 
+  imageUrl: z.array(z.string().url()).optional() 
 });

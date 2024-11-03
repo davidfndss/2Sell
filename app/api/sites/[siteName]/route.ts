@@ -14,6 +14,9 @@ export async function GET(req: Request, { params }: { params: { siteName: string
     const response = await prisma.site.findUnique({ where: {
       name: siteName
     }})
+    
+    if (!response) return NextResponse.json({message: "Site not found"}, {status: 404});
+
     return NextResponse.json(response, {status: 200});
   } catch (err) {
     if (err instanceof Error) {

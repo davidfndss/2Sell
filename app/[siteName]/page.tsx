@@ -152,7 +152,7 @@ const HomePage = () => {
                   <i className={`bi bi-shop text-6xl text-${siteResponse.color}-500`}></i>
                   <div>
                     <h2 className="text-2xl font-bold">EM BREVE...</h2>
-                    <h3 className="text-zinc-500">Estamos adicionando nossos produtos. Volte em breve para conferir as novidades</h3>
+                    <h3 className="text-zinc-500">Estamos adicionando nossos produtos, Volte em breve para conferir as novidades.</h3>
                   </div>
                 </article>
               ) 

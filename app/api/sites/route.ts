@@ -24,25 +24,25 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const site = searchParams.get('site');
+// export async function GET(request: Request) {
+//   const { searchParams } = new URL(request.url);
+//   const site = searchParams.get('site');
 
-  try {
-    if (site) {
-      const siteFound = await prisma.site.findUnique({
-        where: { name: site },
-      });
+//   try {
+//     if (site) {
+//       const siteFound = await prisma.site.findUnique({
+//         where: { name: site },
+//       });
 
-      if (!siteFound) {
-        return NextResponse.json({ error: 'Site not found' }, { status: 404 });
-      }
+//       if (!siteFound) {
+//         return NextResponse.json({ error: 'Site not found' }, { status: 404 });
+//       }
 
-      return NextResponse.json(siteFound, { status: 200 });
-    } else {
-      return NextResponse.json({"message": "site not found"}, { status: 200 });
-    }
-  } catch (error) {
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
-  }
-}
+//       return NextResponse.json(siteFound, { status: 200 });
+//     } else {
+//       return NextResponse.json({"message": "site not found"}, { status: 200 });
+//     }
+//   } catch (error) {
+//     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+//   }
+// }

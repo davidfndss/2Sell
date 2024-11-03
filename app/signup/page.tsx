@@ -169,14 +169,18 @@ const Signup = () => {
             </div>
             <div className="flex flex-col justify-center items-start gap-2">
               <label htmlFor="phone">Número para contato:</label>
-              <input 
-                type="text" 
-                id="phone" 
-                name="phone" 
-                onChange={handleOwnerChange} 
-                required 
-                className={`w-full p-2 rounded bg-zinc-100 border dark:bg-zinc-900 dark:border-zinc-800 ${colorClasses[mainColor].focus}`} 
-              />
+              <div className="flex gap-2 items-center w-full">
+                <i className="bi bi-whatsapp text-green-500 text-3xl w-[80px] text-center"></i>
+                <input 
+                  type="text" 
+                  id="phone" 
+                  name="phone" 
+                  onChange={handleOwnerChange} 
+                  required 
+                  className={`w-full p-2 rounded bg-zinc-100 border dark:bg-zinc-900 dark:border-zinc-800 ${colorClasses[mainColor].focus}`} 
+                />
+              </div>
+             
               <p className="text-zinc-700 dark:text-zinc-500 text-sm">Nós da 2sell não entraremos em contato com você pelo seu número, apenas seus clientes.</p>
               {ownerCreateErrorResponseMessage && <p className="text-red-500">{ownerCreateErrorResponseMessage}</p>}
             </div>

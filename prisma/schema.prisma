@@ -23,9 +23,9 @@ model Site {
   name      String    @unique
   color     String
   icon      String
-  useTopHeader Boolean @default(true)
-  useGradientBox Boolean @default(true)
-  useTags   Boolean @default(true)
+  useTopHeader Boolean 
+  useGradientBox Boolean
+  useTags   Boolean 
   topHeaderText String
   gradientBoxText String[]
   tags      String[]

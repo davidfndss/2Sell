@@ -97,8 +97,8 @@ export default function EcommerceFinalSteps() {
           gradientBoxText: gradientBoxText
         }),
       });
-      const result = await response.json();
-      router.push(`${name}/site-created`)
+      const result = await response.json().then(() => router.push(`${name}/site-created`));
+      
     } catch (error: unknown) {
       setSiteCreateErrorResponseMessage(`Erro ao criar site: ${error instanceof Error ? error.message : 'Tente novamente mais tarde.'}`);
     }
@@ -205,7 +205,7 @@ export default function EcommerceFinalSteps() {
               <button onClick={addTag} className={`bg-${mainColor}-500 text-white px-4 py-2 rounded-lg transition hover:bg-${mainColor}-400`}>Adicionar</button>
             </div>
             
-            <div className="flex gap-2 w-full mt-[8px]">
+            <div className="flex flex-wrap gap-2 w-full mt-[8px]">
               {tags.map((tag, index) => (
                 <div key={index} className="flex gap-2 justify-center items-center rounded-full border border-zinc-600 px-2 py-1 transition focus:bg-${mainColor}-500">
                   <span className="text-sm">{tag}</span>
@@ -231,7 +231,7 @@ export default function EcommerceFinalSteps() {
                           Suporte
                           </nav>
                           <nav className="text-center">
-                          30% de desconto para novos usuários{" "}
+                          {topHeaderText}
                           </nav>
                           <nav className={`hidden cursor-pointer transition hover:text-${mainColor}-500 sm:block`}>
                           Avaliar <i className="bi bi-chevron-down"></i>

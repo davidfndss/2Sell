@@ -17,14 +17,14 @@ export function ThemeSwitchBtn({ color }: ThemeSwitchBtnProps) {
   }, [theme, setTheme]);
 
   return (
-    <div className="text-[22px]">
+    <div className="text-[22px] text-zinc-300">
       {theme === "light" ? (
         <button onClick={() => setTheme("dark")}>
-          <i className={`bi bi-moon-fill transition text-black hover:text-${color}-500 dark:hover:text-${color}-400`}></i>
+          <i className={`bi bi-moon-fill transition text-zinc-300 hover:text-${color}-500 dark:hover:text-${color}-400`}></i>
         </button>
       ) : (
         <button onClick={() => setTheme("light")}>
-          <i className={`bi bi-sun-fill transition text-white hover:text-${color}-500 dark:hover:text-${color}-400`}></i>
+          <i className={`bi bi-sun-fill transition text-zinc-500 hover:text-${color}-500 dark:hover:text-${color}-400`}></i>
         </button>
       )}
     </div>
