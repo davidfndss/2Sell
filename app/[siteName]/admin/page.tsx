@@ -57,7 +57,8 @@ const HomePageAdmin = () => {
       id: string,
       name: string,
       price: number,
-      description: string 
+      description: string,
+      createdAt: Date
     }[], 
     useTopHeader: boolean, 
     ownerId: string,
@@ -102,6 +103,7 @@ const HomePageAdmin = () => {
   
       const siteResponse = await response.json();
       setSiteResponse(siteResponse);
+      console.log(siteResponse)
     } catch (err: unknown) {
       if (err instanceof Error) {
         console.error(err.message);
@@ -139,7 +141,7 @@ const HomePageAdmin = () => {
               <>
                 <section className="w-full m-auto mt-[20px] grid grid-cols-2 gap-[1vw] justify-center items-center md:grid-cols-3 lg:grid-cols-4">
                   {siteResponse.products.map((product) => (
-                    <Card key={product.id} itemId={product.id} mainColor={siteResponse.color} pageName={siteResponse.name} icon={siteResponse.icon} />
+                    <Card key={product.id} itemId={product.id} name={product.name} mainColor={siteResponse.color} pageName={siteResponse.name} icon={siteResponse.icon} createdAt={product.createdAt} />
                   ))}
                 </section>
                 <button className={`h-[7vh] w-full flex justify-center items-center gap-1 text-sm ${colorClasses[siteResponse.color].text} transition hover:text-${siteResponse.color}-400 mt-[1vh] lg:text-[16px]`}>

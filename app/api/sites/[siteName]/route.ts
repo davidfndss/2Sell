@@ -11,9 +11,14 @@ export async function GET(req: Request, { params }: { params: { siteName: string
   }
 
   try {
-    const response = await prisma.site.findUnique({ where: {
-      name: siteName
-    }})
+    const response = await prisma.site.findUnique({ 
+      where: {
+        name: siteName
+      },
+      include: {
+        products: true
+      }
+    })
     
     if (!response) return NextResponse.json({message: "Site not found"}, {status: 404});
 

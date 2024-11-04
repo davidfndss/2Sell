@@ -135,7 +135,7 @@ export default function AddProduct() {
       }
 
       const newProduct = await response.json();
-      console.log('Produto criado com sucesso:', newProduct);
+      router.push(`/${siteName}/admin`)
     } catch (err) {
       console.error('Erro ao criar produto:', 
         (err !== null && typeof err === "object" && err.hasOwnProperty("message")) 

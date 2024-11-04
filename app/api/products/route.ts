@@ -14,7 +14,7 @@ export async function POST(request: Request) {
 
     for (const file of validatedProduct.imageUrl) {
       const { data, error } = await supabase.storage
-        .from('your-bucket-name')
+        .from("product-images")
         .upload(`products/${Date.now()}_${file.name}`, file);
 
       if (error) {
@@ -45,6 +45,7 @@ export async function POST(request: Request) {
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.errors }, { status: 400 });
     }
+    console.error(error)
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }

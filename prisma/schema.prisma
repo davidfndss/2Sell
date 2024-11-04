@@ -40,7 +40,8 @@ model Product {
   id        String    @id @map("_id") @default(auto()) @db.ObjectId
   name      String
   description String
-  location  String
+  price     String
+  imageUrl  String[]
   tags      String[]
   siteId    String    @db.ObjectId
   site      Site      @relation(fields: [siteId], references: [id])
