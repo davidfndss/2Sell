@@ -10,6 +10,7 @@ import Header from "@/components/Header/Header";
 import Logo from "@/components/Logo/Logo";
 import FileDragAndDropArea from "@/components/FileDragAndDropArea/FileDragAndDropArea";
 import { LoadingScreen } from "@/components/Loading/LoadingScreen";
+import { supabase } from '../../../../utils/supabaseClient';
 
 type Color = "green" | "blue" | "purple" | "red" | "orange" | "yellow";
 
@@ -87,7 +88,7 @@ export default function AddProduct() {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
-  
+
       if (!response.ok) {
         const errorText = await response.text();
         throw new Error(`Error: ${response.status} - ${errorText}`);
@@ -112,38 +113,69 @@ export default function AddProduct() {
   };
 
 
+  const uploadImagesAndGetUrls = async (files: File[]): Promise<string[]> => {
+    const urls: string[] = [];
+    console.log(files)
+    for (const file of files) {
+        const { data, error } = await supabase.storage
+            .from("product-images")
+            .upload(`${siteName}/${Date.now()}_${file.name}`, file);
+
+        if (error) throw new Error(`Erro ao fazer upload da imagem: ${error.message}`);
+
+        try {
+          const getUrl = await supabase
+            .storage
+            .from("product-images")
+            .getPublicUrl(data.path);
+
+          console.log(getUrl)
+          urls.push(getUrl.data.publicUrl);
+        } catch (err) {
+          console.error(err)
+        }
+
+        
+    }
+    console.log(urls)
+    return urls;
+  };
+
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const productToSubmit = {
-      ...productData,
-      siteId: siteResponse?.id,
-      imageUrl: files.map(file => file.name), 
-    };
-
     try {
-      const response = await fetch('/api/products', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(productToSubmit),
-      });
+        const imageUrls = await uploadImagesAndGetUrls(files);
+        console.log(imageUrls)
+        const productToSubmit = {
+            ...productData,
+            siteId: siteResponse?.id,
+            imageUrl: imageUrls, 
+        };
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Error: ${response.status} - ${errorText}`);
-      }
+        const response = await fetch('/api/products', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(productToSubmit),
+        });
 
-      const newProduct = await response.json();
-      router.push(`/${siteName}/admin`)
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Error: ${response.status} - ${errorText}`);
+        }
+
+        const newProduct = await response.json();
+        router.push(`/${siteName}/admin`);
     } catch (err) {
-      console.error('Erro ao criar produto:', 
-        (err !== null && typeof err === "object" && err.hasOwnProperty("message")) 
-        ? err.message 
-        : err
-      );
+        console.error(err)
+        console.error('Erro ao criar produto:', 
+            err instanceof Error ? err.message : err
+        );
     }
   };
+
 
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % files.length);

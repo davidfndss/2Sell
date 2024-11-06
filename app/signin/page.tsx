@@ -34,7 +34,7 @@ const Signin = () => {
       }
 
       const result = await response.json();
-      setCookie("atk", result.atk);
+      setCookie("atk", result.atk, {expires: 1});
       router.push("/dashboard");
     } catch (error: unknown) {
       if (error instanceof Error) {

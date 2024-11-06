@@ -219,8 +219,8 @@ export default function EcommerceFinalSteps() {
       </div>
 
 
-      <section className="mt-8 border rounded-xl overflow-hidden border border-2 border-zinc-800 mt-4 pb-4">
-        <div className="bg-zinc-800 w-full p-1 text-center text-sm text-zinc-400">Exemplo</div>
+      <section className="mt-8 border rounded-xl overflow-hidden border border-2 border-zinc-300 dark:border-zinc-800 mt-4 pb-4">
+        <div className="bg-zinc-300 w-full p-1 text-center text-zinc-900 text-sm dark:text-zinc-400 dark:bg-zinc-800">Exemplo</div>
         <header className="w-[80vw] max-w-[1000px] flex flex-col justify-between items-center bg-white z-10 dark:bg-black">
             {
               useTopHeader == true
@@ -266,7 +266,7 @@ export default function EcommerceFinalSteps() {
             </article>
         </header>
 
-        <article className="mt-[35px] w-[75vw] m-auto flex flex-col max-w-[1000px] px-1">
+        <article className="mt-[35px] max-w-[985px] w-[75vw] m-auto flex flex-col max-w-[1000px] px-1">
           
           {
             useGradientBox == true
@@ -294,7 +294,7 @@ export default function EcommerceFinalSteps() {
           </div>
         </article>
 
-        <h1 className="w-[74vw] max-w-[990px] m-auto mt-[10px] font-bold font-antom tracking-tighter text-2xl">Novos produtos</h1>
+        <h1 className="w-[74vw] max-w-[985px] m-auto mt-[10px] ml-3 font-bold font-antom tracking-tighter text-2xl">Novos produtos</h1>
         <h1 className="w-full m-auto mt-[10px] font-bold font-antom tracking-tighter text-2xl text-zinc-500 text-center">...</h1>
       </section>
             

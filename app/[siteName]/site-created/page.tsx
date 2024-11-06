@@ -90,15 +90,25 @@ export default function SiteCreated() {
 
   if (siteResponse) {
     return (
-      <main className="w-[80vw] max-w-[1000px] m-auto mt-[20vw] flex flex-col px-2 rounded-xl border-2 border-zinc-700 gap-4 justify-center items-center py-4">
-        <Logo pageName={siteResponse.name} color={siteResponse.color} icon={siteResponse.icon} />
-        <h1><span className={`text-${siteResponse.color}-500`}>Parabéns!</span> seu site foi criado com sucesso!</h1>
-        <button className={`rounded bg-${siteResponse.color}-500 py-1 font-medium curso-pointer transition hover:bg-${siteResponse.color}-400 w-[250px]`} onClick={() => router.push(`/${siteName}`)}>Ver como ficou <i className="bi bi-eye"></i></button>
-        <button className={`rounded bg-${siteResponse.color}-500 py-1 font-medium curso-pointer transition hover:bg-${siteResponse.color}-400 w-[250px]`} onClick={() => router.push(`/${siteName}/admin/add-product`)}>Adicionar produto <i className="bi bi-plus-circle"></i></button>
-        <div className="flex justify-evenly w-[40vw] max-w-[250px]">
-          <button className={`rounded bg-zinc-800 border-2 w-10 h-10 border-zinc-700 py-1 font-medium curso-pointer transition hover:bg-${siteResponse.color}-500 hover:border-none`} onClick={() => router.push("/dashboard")}><i className="bi bi-house"></i></button>
-          <button className={`rounded bg-zinc-800 border-2 w-10 h-10 border-zinc-700 py-1 font-medium curso-pointer transition hover:bg-${siteResponse.color}-500 hover:border-none`} onClick={() => router.push(`/${siteName}/admin`)}><i className="bi bi-pencil"></i></button>
-          <button className={`rounded bg-zinc-800 border-2 w-10 h-10 border-zinc-700 py-1 font-medium curso-pointer transition hover:bg-${siteResponse.color}-500 hover:border-none`} onClick={() => handleShare()}><i className="bi bi-share"></i></button>
+      <main className="w-[80vw] max-w-[1000px] m-auto mt-[20vw] flex flex-col px-2 rounded-xl gap-4 justify-center items-center py-4">
+        <Logo pageName={siteResponse.name} color={siteResponse.color} icon={siteResponse.icon} lg={true} />
+        <h1 className="text-xl"><span className={`text-${siteResponse.color}-500 font-medium`}>Parabéns!</span> seu site foi criado com sucesso.</h1>
+        <button className={`rounded bg-${siteResponse.color}-500 h-10 py-1 font-medium text-white curso-pointer transition hover:bg-${siteResponse.color}-400 w-[250px]`} onClick={() => router.push(`/${siteName}`)}>Ver como ficou</button>
+        <button className={`rounded bg-${siteResponse.color}-500 h-10 py-1 font-medium text-white transition hover:bg-${siteResponse.color}-400 w-[250px]`} onClick={() => router.push(`/${siteName}/admin/add-product`)}>Adicionar produto</button>
+
+        <div className="flex justify-evenly w-[40vw] max-w-[250px] text-white lg:hidden">
+          <button className={`rounded bg-zinc-800 border-2 w-10 h-10 border-zinc-700 py-1 font-medium transition hover:bg-${siteResponse.color}-500 hover:border-none`} onClick={() => router.push("/dashboard")}><i className="bi bi-house"></i></button>
+          <button className={`rounded bg-zinc-800 border-2 w-10 h-10 border-zinc-700 py-1 font-medium transition hover:bg-${siteResponse.color}-500 hover:border-none`} onClick={() => router.push(`/${siteName}/admin`)}><i className="bi bi-pencil"></i></button>
+          <button className={`rounded bg-zinc-800 border-2 w-10 h-10 border-zinc-700 py-1 font-medium transition hover:bg-${siteResponse.color}-500 hover:border-none`} onClick={() => handleShare()}><i className="bi bi-share"></i></button>
+        </div>
+
+        <div className="hidden flex-col justify-evenly gap-4 w-[40vw] max-w-[250px] text-white lg:flex">
+          <button className={`rounded bg-zinc-800 border-2 h-10 border-zinc-700 py-1 font-medium transition hover:bg-zinc-700 hover:border-none`} onClick={() => router.push("/dashboard")}><i className="bi bi-grid"></i> Dashboard</button>
+
+          <div className="flex w-full gap-4">
+            <button className={`rounded bg-zinc-400 border-2 h-10 w-full border-zinc-400 py-1 font-medium transition hover:bg-zinc-500 hover:border-zinc-500 dark:bg-zinc-800 dark:border-zinc-700 dark:hover:bg-zinc-600 dark:hover:border-zinc-600`} onClick={() => router.push(`/${siteName}/admin`)}><i className="bi bi-pencil"></i></button>
+            <button className={`rounded bg-zinc-400 border-2 h-10 w-full border-zinc-400 py-1 font-medium transition hover:bg-zinc-500 hover:border-zinc-500 dark:bg-zinc-800 dark:border-zinc-700 dark:hover:bg-zinc-600 dark:hover:border-zinc-600`} onClick={() => handleShare()}><i className="bi bi-share"></i></button>
+          </div>
         </div>
       </main>
     );

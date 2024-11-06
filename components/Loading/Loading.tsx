@@ -10,7 +10,7 @@ const Loading: React.FC<LoadingProps> = ({ color, size }) => {
       <div>
         <div
           className={`w-4 h-4 border-2 ${
-            color ? `border-${color}` : "border-white"
+            color ? `border-${color}-500` : "border-green-500 dark:border-white"
           } border-solid border-t-transparent rounded-full animate-spin`}
         ></div>
       </div>

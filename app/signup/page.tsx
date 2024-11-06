@@ -90,7 +90,7 @@ const Signup = () => {
       const errorMessage = errorMessages[result.message as keyof typeof errorMessages] || result.message;
   
       if (response.ok && result.atk) {
-        setCookie("atk", result.atk)
+        setCookie("atk", result.atk, { expires: 1 })
         router.push( name && color && icon ? `/final-steps?name=${name}&color=${color}&icon=${icon}` : `/dashboard`)
       } else {
         setOwnerCreateErrorResponseMessage(errorMessage || 'Erro ao criar usuário');

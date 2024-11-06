@@ -42,3 +42,7 @@ body {
 .animate-spin {
   animation: spin 0.7s ease infinite;
 }
+
+::-webkit-scrollbar{
+  display: none;
+}

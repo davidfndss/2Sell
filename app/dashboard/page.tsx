@@ -78,8 +78,9 @@ const Dashboard = () => {
         headers: { 'Content-Type': 'application/json', atk }
       });
 
-      if (!response.ok) {
-        throw new Error(`Erro na requisição: ${response.statusText}`);
+      if (!response) {
+        console.error()
+        router.push("/404")
       }
 
       const foundUser = await response.json();
@@ -104,7 +105,11 @@ const Dashboard = () => {
       <TwoSellHeader />
       <section className="w-[80vw] m-auto mt-[30vh] max-w-[1000px]">
         {error ? (
-          <p className="text-red-500">Erro: {error}</p>
+          <section className="flex w-full h-full flex-col gap-4 justify-center items-center text-red-500">
+              <i className="bi bi-x-circle-fill text-5xl"></i>
+              <p className="text-red-500 text-xl">Erro: {error}</p>
+          </section>
+          
         ) : !user ? (
           <div className="flex justify-center w-full">
             <Loading />
@@ -140,16 +145,16 @@ const Dashboard = () => {
                     </div>
                     
                     <div className={`flex justify-between w-full max-w-[300px] bg-green-700 border-2 border-green-500 p-3 cursor-pointer rounded-lg border-t-0 rounded-t-none`}>
-                      <button className={`w-full rounded-md bg-green-500 border px-6 h-10 border-green-400 py-1 font-medium  curso-pointer text-white transition hover:bg-green-400 hover:border-green-300`} onClick={() => router.push(`/create`)}><i className="bi bi-plus-circle"></i> Adicionar</button>
+                      <button className={`w-full rounded-md bg-green-500 border px-6 h-10 border-green-400 py-1 font-medium cursor-pointer text-white transition hover:bg-green-400 hover:border-green-300`} onClick={() => router.push(`/create`)}><i className="bi bi-plus-circle"></i> Adicionar</button>
                     </div>
                   </div>
                 </article>
               </>
             ) : (
               <div className="flex flex-col gap-4">
-                <h1 className="text-xl">Olá <span className="text-green-500">{user.name}</span>!</h1>
+                <h1 className="text-xl">Olá <span className="text-green-500 font-medium dark:font-normal">{user.name}</span>!</h1>
                 <p>Pelo visto você ainda não criou nenhum E-commerce.</p>
-                <p><i className="bi bi-arrow-right text-green-500"></i> Clique aqui para <span className="text-green-500 cursor-pointer transition hover:text-green-400" onClick={() => router.push("/create")}>Criar o primeiro</span>.</p>
+                <p><i className="bi bi-arrow-right text-green-500"></i> Clique aqui para <span className="text-green-500 font-medium cursor-pointer transition hover:text-green-400 dark:font-normal" onClick={() => router.push("/create")}>Criar o primeiro</span>.</p>
               </div>
             )}
           </>

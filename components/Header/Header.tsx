@@ -66,7 +66,7 @@ export default function Header(props: {mainColor: Color, icon: string | null, pa
                 <div className="w-[80vw] h-[10vh] max-h-[80px] flex justify-between items-center max-w-[1000px] mr-[15px]">
 
                     <div className="w-[20vw] max-w-[200px]">
-                         <Logo pageName={props.pageName} color={props.mainColor} icon={props.icon} />
+                         <Logo pageName={props.pageName} color={props.mainColor} icon={props.icon} path={`/${props.pageName}`} />
                     </div>
                     
 

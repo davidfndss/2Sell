@@ -5,7 +5,7 @@ import Footer from "@/components/Footer/Footer";
 import GradientBox from "@/components/GradientBox/GradientBox";
 import Header from "@/components/Header/Header";
 import { LoadingScreen } from "@/components/Loading/LoadingScreen";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 type Color = "green" | "blue" | "purple" | "red" | "orange" | "yellow";
@@ -62,6 +62,8 @@ const HomePage = () => {
     topHeaderText: string, 
     gradientBoxText: string[]}>();
 
+  const router = useRouter()
+
   useEffect(() => {
     getSite();
   }, []);
@@ -81,6 +83,7 @@ const HomePage = () => {
       const siteResponse = await response.json();
       setSiteResponse(siteResponse);
     } catch (err: unknown) {
+      router.push("/404")
       if (err instanceof Error) {
         console.error(err.message);
       } else {

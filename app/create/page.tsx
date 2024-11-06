@@ -49,7 +49,7 @@ export default function Create() {
       <main className="w-[80vw] h-full m-auto flex flex-col gap-2 max-w-[1000px]">
         <div className="flex justify-center items-center gap-2 text-zinc-400 mt-[20vh]">
           <i className="bi bi-list-check text-green-500 text-3xl"></i>
-          <h1 className="text-zinc-900 text-2xl font-medium tracking-tight text-center dark:text-zinc-300">Preencha os campos abaixo:</h1>
+          <h1 className="text-green-500 text-2xl font-medium tracking-tight text-center dark:text-zinc-300">Preencha os campos abaixo:</h1>
         </div>
        
         <form className="flex flex-col items-center gap-4 mt-[2vh]">

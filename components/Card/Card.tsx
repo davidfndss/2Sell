@@ -14,10 +14,12 @@ export default function Card(props: {
   }) {
   const router = useRouter()
 
+  console.log(props.imageUrl)
+
   return (
     <div onClick={() => router.push(`/${props.pageName}/item/${props.itemId}?color=${props.mainColor}&name=${props.pageName}&icon=${props.icon}`)} className="w-full item max-w-[200px]">
         <div className="relative border rounded-md bg-zinc-100 h-[39vw] w-[39vw] flex flex-col justify-between cursor-pointer md:h-[26vw] md:w-[26vw] lg:h-[19vw] lg:w-[19vw] max-w-[245px] max-h-[245px] transition dark:bg-zinc-800 dark:border-zinc-700 dark:hover:border-zinc-600 dark:hover:bg-zinc-700">
-          <img src={ props.imageUrl ? imageUrl[0] : `/images/dunk.png`} className="w-[90%] h-[90%] object-cover rounded-md m-auto" />
+          <img src={ props.imageUrl ? props.imageUrl[0] : `/images/dunk.png`} className="w-[90%] h-[90%] object-cover rounded-md m-auto" />
 
           <div className="absolute top-0 w-full flex justify-end p-2">
             <i className="bi bi-heart-fill text-black dark:text-white"></i>

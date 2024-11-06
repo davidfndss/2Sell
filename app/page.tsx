@@ -35,7 +35,7 @@ export default function Home() {
                 <nav className="rounded py-2 px-6 border text-green-500 border-green-500 transition cursor-pointer hover:border-green-500 dark:border-zinc-700 dark:text-white dark:hover:text-green-500 dark:hover:border-green-500" onClick={() => router.push("signin") }>
                   Entrar
                 </nav>
-                <nav className="rounded py-2 px-6 border bg-green-500 text-white transition cursor-pointer  hover:bg-green-400 dark:hover:bg-green-500 dark:border-zinc-600 dark:bg-zinc-600" onClick={() => router.push("signin") }>
+                <nav className="rounded py-2 px-6 border bg-green-500 text-white transition cursor-pointer  hover:bg-green-400 dark:hover:bg-green-500 dark:border-zinc-600 dark:bg-zinc-600" onClick={() => router.push("signup") }>
                   Criar conta
                 </nav>
                 
