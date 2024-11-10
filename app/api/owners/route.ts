@@ -5,11 +5,18 @@ import { z } from 'zod';
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 
-
 const prisma = new PrismaClient();
 
 export async function POST(req: Request) { 
-  const generateToken = (id: string) => jwt.sign({ id: id }, process.env.SECRET_JWT, { expiresIn: 86400 });
+  const generateToken = (id: string) => {
+    const secret = process.env.SECRET_JWT;
+  
+    if (!secret) {
+      throw new Error('SECRET_JWT is not defined in the environment variables');
+    }
+  
+    return jwt.sign({ id: id }, secret, { expiresIn: 86400 });
+  };
 
   try {
     const body = await req.json();
@@ -32,13 +39,4 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
-}
-
-export async function GET(req: Request) {
-  const id = await Cookies.get("id")
-  jwt.decode(id)
-  
-
-  const owners = await prisma.owner.findUnique({where: {id: id}});
-  return NextResponse.json(owners, { status: 200 });
 }

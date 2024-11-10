@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -21,6 +21,7 @@
     "react-dom": "^18",
     "react-dropzone": "^14.2.10",
     "typescript-cookie": "^1.0.6",
+    "vercel": "^37.14.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

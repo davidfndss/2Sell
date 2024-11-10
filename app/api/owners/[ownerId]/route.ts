@@ -1,26 +1,28 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient, Prisma } from '@prisma/client';
-import { NextApiRequest } from 'next';
 
 const prisma = new PrismaClient();
 
 export async function GET(
-  req: NextApiRequest,
-  { params }: { params: { ownerId: string } }
+  req: Request
 ) {
-  const { ownerId } = params;
+  const { searchParams } = new URL(req.url);
+  const ownerId = searchParams.get('ownerId');
+
+  if (!ownerId || ownerId.length !== 24 || !/^[a-f0-9]{24}$/i.test(ownerId)) {
+    return NextResponse.json(
+      {
+        error: 'Invalid ID format. The provided ID must be a 24-character hexadecimal string.',
+      },
+      { status: 400 }
+    );
+  }
 
   try {
-    if (ownerId.length !== 24 || !/^[a-f0-9]{24}$/i.test(ownerId)) {
-      return NextResponse.json(
-        {
-          error: 'Invalid ID format. The provided ID must be a 24-character hexadecimal string.',
-        },
-        { status: 400 }
-      );
-    }
-
-    const owner = await prisma.owner.findUnique({ where: { id: ownerId }, include: { sites: true } });
+    const owner = await prisma.owner.findUnique({
+      where: { id: ownerId },
+      include: { sites: true }
+    });
 
     if (!owner) {
       return NextResponse.json({ error: 'Owner not found' }, { status: 404 });
@@ -32,8 +34,7 @@ export async function GET(
       if (error.code === 'P2023') {
         return NextResponse.json(
           {
-            error:
-              'Database error occurred. Please ensure the request data is valid.',
+            error: 'Database error occurred. Please ensure the request data is valid.',
           },
           { status: 400 }
         );

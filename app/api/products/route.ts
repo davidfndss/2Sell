@@ -9,11 +9,12 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const validatedProduct = productSchema.parse(body);
+    const price = String(validatedProduct.price);
 
     const newProduct = await prisma.product.create({
       data: {
         ...validatedProduct,
-        imageUrl: validatedProduct.imageUrl,
+        price,
       },
     });
 

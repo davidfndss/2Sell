@@ -6,11 +6,13 @@ import { getCookie } from "typescript-cookie"
 
 export default function NotFoundResource() {
     const router = useRouter()
-    const [atk, setAtk] = useState()
+    const [atk, setAtk] = useState<string>()
  
     useEffect(() => {
         const token = getCookie("atk")
-        setAtk(token)
+        if  (token) {
+            setAtk(token)
+        }
     }, [])
 
     return (

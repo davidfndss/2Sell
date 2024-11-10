@@ -1,6 +1,6 @@
 "use client";
 
-import Header from "@/components/Header/Header";
+// import Header from "@/components/Header/Header";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
@@ -22,7 +22,7 @@ export default function ItemPage() {
   const color = searchParams.get("color");
   const icon = searchParams.get("icon");
 
-  const [mainColor, setMainColor] = useState<Color>(
+  const [mainColor] = useState<Color>(
     isValidColor(color) ? color : "green"
   );
 
@@ -30,7 +30,7 @@ export default function ItemPage() {
 
   return (
     <>
-      <Header pageName={name} icon={icon} mainColor={mainColor} />
+      {/* <Header pageName={name} icon={icon} mainColor={mainColor} /> */}
       <main className="mt-[115px] w-[80vw] m-auto mb-[20vh] max-w-[1000px]">
         <section className="w-full h-[60vw] bg-zinc-100 rounded flex justify-between items-end lg:h-[30vw] dark:bg-zinc-800 dark:border dark:border-zinc-700">
           <img

@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 type Color = "green" | "blue" | "purple" | "red" | "orange" | "yellow";
 
 const ScrollButton = (props: { mainColor: Color }) => {
-  const [isVisible, setIsVisible] = useState(true);
   const [isAtBottom, setIsAtBottom] = useState(false);
 
   const scrollToBottom = () => {
@@ -14,7 +13,6 @@ const ScrollButton = (props: { mainColor: Color }) => {
     const scrolledToBottom =
       window.innerHeight + window.scrollY >= document.documentElement.scrollHeight;
     setIsAtBottom(scrolledToBottom);
-    setIsVisible(!scrolledToBottom);
   };
 
   useEffect(() => {

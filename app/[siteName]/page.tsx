@@ -53,7 +53,9 @@ const HomePage = () => {
       id: string,
       name: string,
       price: number,
-      description: string 
+      description: string,
+      imageUrl: string[],
+      createdAt: Date 
     }[], 
     useTopHeader: boolean, 
     useGradientBox: boolean, 
@@ -102,10 +104,7 @@ const HomePage = () => {
             siteResponse.useGradientBox == true 
               ? <GradientBox color={siteResponse.color} text1={siteResponse.gradientBoxText[0]} text2={siteResponse.gradientBoxText[1]} />
               : null
-          }
-          
-
-         
+          }        
 
             { 
               siteResponse.useTags == true 
@@ -138,10 +137,12 @@ const HomePage = () => {
               ? (
                 <>
                   <section className="w-full m-auto mt-[20px] grid grid-cols-2 gap-[1vw] justify-center items-center md:grid-cols-3 lg:grid-cols-4">
-                    <Card itemId={"1"} mainColor={siteResponse.color} pageName={siteResponse.name} icon={siteResponse.icon} />
-                    <Card itemId={"2"} mainColor={siteResponse.color} pageName={siteResponse.name} icon={siteResponse.icon} />
-                    <Card itemId={"3"} mainColor={siteResponse.color} pageName={siteResponse.name} icon={siteResponse.icon} />
-                    <Card itemId={"4"} mainColor={siteResponse.color} pageName={siteResponse.name} icon={siteResponse.icon} />
+                    {
+                      siteResponse.products.map((item) => {
+                        return <Card itemId={"1"} mainColor={siteResponse.color} pageName={siteResponse.name} icon={siteResponse.icon} key={item.id} name={item.name} imageUrl={item.imageUrl} createdAt={item.createdAt}  />
+                      })
+                    }
+                    
                   </section>
       
                   <button className={`h-[7vh] w-full flex justify-center items-center gap-1 text-sm ${colorClasses[siteResponse.color].text} transition hover:text-${siteResponse.color}-400 mt-[1vh] lg:text-[16px]`}>

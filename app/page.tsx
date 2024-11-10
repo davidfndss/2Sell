@@ -3,16 +3,14 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import TwoSellFooter from "@/components/Footer/2SellFooter";
-import { ThemeSwitchBtn } from "@/components/Buttons/ThemeToggleBtn/ThemeSwitchBtn";
 import TwoSellLogo from "@/components/Logo/2SellLogo";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import { getCookie } from "typescript-cookie";
 
 export default function Home() {
   const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
 
   useEffect(() => {
     setTheme("dark");

@@ -1,13 +1,11 @@
 'use client';
 
 import { useSearchParams, useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Logo from "@/components/Logo/Logo";
 import { getCookie } from 'typescript-cookie';
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import TwoSellHeader from "@/components/Header/2SellHeader";
 import GradientBox from "@/components/GradientBox/GradientBox";
-import ExampleHeader from "@/components/Header/ExampleHeader";
 import { ThemeSwitchBtn } from "@/components/Buttons/ThemeToggleBtn/ThemeSwitchBtn";
 import ScrollButton from "@/components/Buttons/ScrollButton";
 
@@ -52,7 +50,17 @@ export default function EcommerceFinalSteps() {
   const color = (searchParams.get("color") as Color) || 'green';
   const icon = searchParams.get("icon");
   
-  const [mainColor, setMainColor] = useState<Color>(color);
+  const router = useRouter();
+  const atk = getCookie("atk")
+
+  let ownerId = '';
+
+  if (atk) {
+    const decodedToken = jwt.decode(atk)
+    ownerId = (decodedToken as JwtPayload)?.id ?? '';
+  }
+
+  const [mainColor] = useState<Color>(color);
   const [useTopHeader, setUseTopHeader] = useState(true);
   const [topHeaderText, setTopHeaderText] = useState("30% de desconto para novos usuários")
   const [useGradientBox, setUseGradientBox] = useState(true);
@@ -60,26 +68,10 @@ export default function EcommerceFinalSteps() {
   const [useTags, setUseTags] = useState(true);
   const [tags, setTags] = useState<string[]>(["Populares","Exclusivos","Rentáveis","Imperdíveis"]);
   const [newTag, setNewTag] = useState('');
-  const [SiteCreateErrorResponseMessage, setSiteCreateErrorResponseMessage] = useState<String>("");
+  const [SiteCreateErrorResponseMessage, setSiteCreateErrorResponseMessage] = useState<string>("");
+  const [siteData] = useState({ name: name, color: color, icon: icon, tags: '', ownerId: ownerId });
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
-  const atk = getCookie("atk");
-
-  if (!atk) {
-    return (
-      <div className="min-w-screen min-h-screen flex justify-center items-center text-center font-montserrat tracking-tight font-medium flex-col gap-3">
-        <TwoSellHeader />
-        <h1>Você precisa estar logado para terminar a criação deste E-commerce.</h1>
-        <button className="text-green-500 cursor-pointer transition hover:text-green-400" onClick={() => router.push("/signin")}>Entrar</button>
-      </div>
-    );
-  }
-
-  const decodedToken = jwt.decode(atk)
-  const ownerId = (decodedToken as JwtPayload)?.id ?? '';
-
-  const [siteData, setSiteData] = useState({ name: name, color: color, icon: icon, tags: '', ownerId: ownerId });
 
   const submitSite = async (ownerId: string) => {
     try {
@@ -97,7 +89,7 @@ export default function EcommerceFinalSteps() {
           gradientBoxText: gradientBoxText
         }),
       });
-      const result = await response.json().then(() => router.push(`${name}/site-created`));
+      await response.json().then(() => router.push(`${name}/site-created`));
       
     } catch (error: unknown) {
       setSiteCreateErrorResponseMessage(`Erro ao criar site: ${error instanceof Error ? error.message : 'Tente novamente mais tarde.'}`);
@@ -128,6 +120,12 @@ export default function EcommerceFinalSteps() {
     setTags(tags.filter(tag => tag !== tagToRemove));
   };
 
+  useEffect(() => {
+    setTimeout(() => { 
+      if (!atk) { router.push("/signin")}
+    }, 2000)
+    
+  }, [])
 
   return (
     <main className="mt-[20vh] w-[80vw] max-w-[1000px] m-auto">

@@ -6,7 +6,15 @@ import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 
-const generateToken = (id: String) => jwt.sign({ id: id }, process.env.SECRET_JWT, { expiresIn: 86400 });
+const generateToken = (id: string) => {
+  const secret = process.env.SECRET_JWT;
+
+  if (!secret) {
+    throw new Error('SECRET_JWT is not defined in the environment variables');
+  }
+
+  return jwt.sign({ id: id }, secret, { expiresIn: 86400 });
+};
 
 export async function POST(request: NextRequest) {
   try {

@@ -2,7 +2,6 @@
 
 import TwoSellHeader from '@/components/Header/2SellHeader';
 import { Loading } from '@/components/Loading/Loading';
-import { LoadingScreen } from '@/components/Loading/LoadingScreen';
 import jwt from 'jsonwebtoken';
 import { useState, useEffect } from 'react';
 import { getCookie } from 'typescript-cookie';
@@ -52,8 +51,8 @@ const colorClasses: Record<Color, { bg: string; text: string; hover: string; bor
 };
 
 const Dashboard = () => {
-  const [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
+  const [user, setUser] = useState<{name: string} | null>(null);
+  const [error, setError] = useState<{ message: string } | null>(null);
   const [ecommerces, setEcommerces] = useState([])
 
   const router = useRouter()
@@ -67,8 +66,9 @@ const Dashboard = () => {
       }
 
       const decoded = jwt.decode(atk);
-      if (!decoded || !decoded.id) {
-        throw new Error("Token inválido ou corrompido.");
+
+      if (!decoded || typeof decoded === 'string' || !decoded.id) {
+          throw new Error("Token inválido ou corrompido.");
       }
 
       const ownerId = decoded.id;
@@ -90,15 +90,32 @@ const Dashboard = () => {
         setEcommerces(foundUser.sites)
       }
 
-    } catch (error) {
-      console.error(error);
-      setError(error.message);
-    }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error('Erro desconhecido');
+      }
+    }    
   };
 
   useEffect(() => {
     findUserById();
   }, []);
+
+  
+  const handleShare = async () => {
+    // if (isShareSupported) {
+    //   try {
+    //     await navigator.share({ title: 'Compartilhe este link', url: `/${siteName}` });
+    //   } catch (error) {
+    //     console.error('Erro ao compartilhar:', error);
+    //   }
+    // } else {
+    //   handleCopyToClipboard();
+    // }
+    console.log("to-Do: implement share feature")
+  };
 
   return (
     <>
@@ -107,7 +124,7 @@ const Dashboard = () => {
         {error ? (
           <section className="flex w-full h-full flex-col gap-4 justify-center items-center text-red-500">
               <i className="bi bi-x-circle-fill text-5xl"></i>
-              <p className="text-red-500 text-xl">Erro: {error}</p>
+              <p className="text-red-500 text-xl">Erro: {error.message}</p>
           </section>
           
         ) : !user ? (
@@ -123,7 +140,7 @@ const Dashboard = () => {
          
                 
                 <article className="mt-4 flex flex-col gap-3 md:grid md:grid-cols-3">
-                  {ecommerces.map((ecommerce: {color: string, name: string, icon: string}, index) => (
+                  {ecommerces.map((ecommerce: {color: Color, name: string, icon: string}, index) => (
                     <div key={index}>
                       <div className={`w-full max-w-[300px] rounded-lg border-2 rounded-b-none border-b-0 p-2 bg-zinc-50 ${colorClasses[ecommerce.color].border} dark:bg-black dark:border-zinc-800`}>
                         <Logo pageName={ecommerce.name} color={ecommerce.color} icon={ecommerce.icon} path={`/${ecommerce.name}/admin`} />
@@ -134,7 +151,7 @@ const Dashboard = () => {
                 
                         <button className={`rounded-md bg-zinc-950 border w-[80px] h-10 border-zinc-400 py-1 font-medium  curso-pointer transition hover:bg-${ecommerce.color}-500 hover:border-zinc-100 dark:border-zinc-700 hover:border-2`} onClick={() => router.push(`/${ecommerce.name}/admin/edit`)}><i className="bi bi-pencil"></i></button>
                 
-                        <button className={`rounded-md bg-zinc-950 border w-[80px] h-10 border-zinc-400 py-1 font-medium  curso-pointer transition hover:bg-${ecommerce.color}-500 hover:border-zinc-100 dark:border-zinc-700 hover:border-2`} onClick={() => handleShare ()}><i className="bi bi-share"></i></button>
+                        <button className={`rounded-md bg-zinc-950 border w-[80px] h-10 border-zinc-400 py-1 font-medium  curso-pointer transition hover:bg-${ecommerce.color}-500 hover:border-zinc-100 dark:border-zinc-700 hover:border-2`} onClick={() => handleShare()}><i className="bi bi-share"></i></button>
                       </div>
                     </div>
                   ))}

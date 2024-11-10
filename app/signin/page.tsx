@@ -1,11 +1,10 @@
 "use client";
 
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { setCookie } from 'typescript-cookie';
 
 const Signin = () => {
-  const searchParams = useSearchParams();
   const [ownerData, setOwnerData] = useState({ email: '', password: '' });
   const [errorMessage, setErrorMessage] = useState('');
   

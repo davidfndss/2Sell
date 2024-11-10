@@ -46,7 +46,7 @@ const ShareButton: React.FC<ShareButtonProps> = (props: { url: string, mainColor
   return (
     <button onClick={handleShare}>
           <i
-          className={`bi bi-share cursor-pointer hover:text-${props.mainColor}-500 transition`}
+          className={`bi bi-share cursor-pointer hover:text-${props.mainColor}-500 transition ${copied ? `text-${props.mainColor}-500` : ``}`}
           ></i>
     </button>
   );

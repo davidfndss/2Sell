@@ -6,7 +6,6 @@ import TwoSellHeader from "@/components/Header/2SellHeader";
 import { getCookie } from "typescript-cookie";
 import { useParams, useRouter } from "next/navigation";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import Header from "@/components/Header/Header";
 import Logo from "@/components/Logo/Logo";
 import FileDragAndDropArea from "@/components/FileDragAndDropArea/FileDragAndDropArea";
 import { LoadingScreen } from "@/components/Loading/LoadingScreen";
@@ -15,10 +14,10 @@ import { supabase } from '../../../../utils/supabaseClient';
 type Color = "green" | "blue" | "purple" | "red" | "orange" | "yellow";
 
 interface Product {
-  name: String;
-  description: String;
+  name: string;
+  description: string;
   price: number;
-  imageUrl: String[];
+  imageUrl: string[];
 }
 
 export default function AddProduct() {
@@ -166,7 +165,6 @@ export default function AddProduct() {
             throw new Error(`Error: ${response.status} - ${errorText}`);
         }
 
-        const newProduct = await response.json();
         router.push(`/${siteName}/admin`);
     } catch (err) {
         console.error(err)

@@ -72,11 +72,11 @@ const HomePageAdmin = () => {
 
   const router = useRouter()
 
+  const atk = getCookie("atk");
+
   useEffect(() => {
     if (atk) getSite();
   }, []);
-
-  const atk = getCookie("atk");
 
   if (!atk) return (
     <>

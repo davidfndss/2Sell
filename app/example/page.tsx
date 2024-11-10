@@ -1,11 +1,11 @@
 'use client';
 
-import Card from "@/components/Card/ExampleCard";
+// import Card from "@/components/Card/ExampleCard";
 import Footer from "@/components/Footer/Footer";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import GradientBox from "@/components/GradientBox/GradientBox";
-import ExampleHeader from "@/components/Header/ExampleHeader";
+// import ExampleHeader from "@/components/Header/ExampleHeader";
 import ScrollButton from "@/components/Buttons/ScrollButton";
 import ExampleCard from "@/components/Card/ExampleCard";
 import { getCookie } from "typescript-cookie";
@@ -54,15 +54,13 @@ export default function Example() {
   const color = (searchParams.get("color") as Color) || 'green'; 
   const icon = searchParams.get("icon");
 
-  const [useTopHeader, setUseTopHeader] = useState(true);
-  const [topHeaderText, setTopHeaderText] = useState("30% de desconto para novos usuários")
-  const [useGradientBox, setUseGradientBox] = useState(true);
-  const [gradientBoxText, setGradientBoxText] = useState(["Até 70% de desconto", "Promoção de verão"])
-  const [useTags, setUseTags] = useState(true);
-  const [tags, setTags] = useState<string[]>(["Populares","Exclusivos","Rentáveis","Imperdíveis"]);
-  const [newTag, setNewTag] = useState('');
-  const [SiteCreateErrorResponseMessage, setSiteCreateErrorResponseMessage] = useState<String>("");
-  const [mainColor, setMainColor] = useState<Color>(color);
+  const [useTopHeader] = useState(true);
+  const [topHeaderText] = useState("30% de desconto para novos usuários")
+  const [useGradientBox] = useState(true);
+  const [gradientBoxText] = useState(["Até 70% de desconto", "Promoção de verão"])
+  // const [useTags, setUseTags] = useState(true);
+  const [tags] = useState<string[]>(["Populares","Exclusivos","Rentáveis","Imperdíveis"]);
+  const [mainColor] = useState<Color>(color);
   const [atk, setAtk] = useState<string | undefined>()
 
   const router = useRouter()

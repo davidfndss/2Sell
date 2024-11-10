@@ -1,4 +1,3 @@
-import CTAButton from "../Buttons/CTAButton";
 import Logo from "../Logo/Logo";
 import { ThemeSwitchBtn } from "../Buttons/ThemeToggleBtn/ThemeSwitchBtn";
 

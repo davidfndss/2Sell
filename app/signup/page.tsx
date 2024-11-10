@@ -2,7 +2,6 @@
 
 import { ownerSchema } from '@/utils/validation-schemas';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { Result } from 'postcss';
 import { useState } from 'react';
 import { setCookie } from 'typescript-cookie';
 import { ZodError } from 'zod';
@@ -54,15 +53,11 @@ const Signup = () => {
   const name = searchParams.get("name");
   const color = (searchParams.get("color") as Color) || 'green'; 
   const icon = searchParams.get("icon");
-  const [mainColor, setMainColor] = useState<Color>(color);
-  const [ownerId, setOwnerId] = useState();
+  const [mainColor] = useState<Color>(color);
 
   const [ownerData, setOwnerData] = useState({ name: '', email: '', password: '', phone: '' });
-  const [siteData, setSiteData] = useState({ name: name, color: color, icon: icon, tags: '', ownerId: ownerId });
   
   const [ownerCreateErrorResponseMessage, setOwnerCreateErrorResponseMessage] = useState('');
-
-  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
 
   const router = useRouter();
 
@@ -105,7 +100,7 @@ const Signup = () => {
       }
       
       if (error instanceof Error) {
-        setOwnerCreateErrorResponseMessage(`${error.issues ? error.issues.map(err => err.message).join(", ") : error.message}`);
+        setOwnerCreateErrorResponseMessage(`${error.message}`);
       } else {
         setOwnerCreateErrorResponseMessage('Erro ao criar usuário');
       }
