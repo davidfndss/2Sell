@@ -6,6 +6,8 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import ScrollButton from "@/components/Buttons/ScrollButton";
 import Footer from "@/components/Footer/Footer";
+import Header from "@/components/Header/Header";
+import ExampleHeader from "@/components/Header/ExampleHeader";
 
 type Color = "green" | "blue" | "purple" | "red" | "orange" | "yellow";
 
@@ -30,7 +32,7 @@ export default function ItemPage() {
 
   return (
     <>
-      {/* <Header pageName={name} icon={icon} mainColor={mainColor} /> */}
+      <ExampleHeader pageName={name} icon={icon} mainColor={mainColor} />
       <main className="mt-[115px] w-[80vw] m-auto mb-[20vh] max-w-[1000px]">
         <section className="w-full h-[60vw] bg-zinc-100 rounded flex justify-between items-end lg:h-[30vw] dark:bg-zinc-800 dark:border dark:border-zinc-700">
           <img
@@ -50,10 +52,10 @@ export default function ItemPage() {
             <i className="bi bi-chevron-right text-xl"></i>
           </button>
         </section>
-        <article className="flex items-start justify-between">
+        <article className="flex items-start justify-between mt-[10px]">
           <div className="w-[80%]">
             <h1 className="text-2xl font-medium tracking-tight mt-1">
-              Item 1 {itemId}
+              Exemplo
             </h1>
             <h1
               className={`text-2xl tracking-tight text-${mainColor}-500 mt-1`}
@@ -83,24 +85,7 @@ export default function ItemPage() {
           legado das quadras.
         </p>
 
-        <div className="mt-1 flex items-center text-zinc-400 font-antom tracking-tight gap-1">
-          <span className="font-montserrat">
-            <i className="bi bi-geo-alt"></i>
-            Brazil
-          </span>
-          <span className="font-montserrat">•</span>
-          <span className="font-montserrat">05/09/2024</span>
-        </div>
-
-        {/* <button
-          className={`w-[70vw] bg-${mainColor}-500 fixed bottom-0 h-[7vh] text-white text-2xl font-montserrat font-medium tracking-tight rounded-full flex justify-center items-center m-auto right-[15vw] left-[15vw] mb-2 transition hover:bg-black hover:text-white`}
-        >
-          <i className="bi bi-whatsapp mr-2"></i>
-          Enviar mensagem
-        </button> */}
         <ScrollButton mainColor={mainColor}  />
-
-        <Footer pageName={name} color={mainColor} icon={icon} />
 
         <div className="m-auto w-[80vw] max-w-[1000px] mt-[20px] mb-[10px]">
           <button className={`bg-${mainColor}-800 text-white py-3 w-full rounded-xl transition hover:bg-black text-xl`} onClick={() => router.push("/signup") }>

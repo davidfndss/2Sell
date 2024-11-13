@@ -49,15 +49,27 @@ export default function EcommerceFinalSteps() {
   const name = searchParams.get("name");
   const color = (searchParams.get("color") as Color) || 'green';
   const icon = searchParams.get("icon");
-  
+
   const router = useRouter();
   const atk = getCookie("atk")
 
-  let ownerId = '';
+  let ownerId: string = '';
+  let contactNumber: string = ""
 
   if (atk) {
     const decodedToken = jwt.decode(atk)
     ownerId = (decodedToken as JwtPayload)?.id ?? '';
+
+    
+  }
+
+  const getUser = async (ownerId: string) => {
+    try {
+      const userFound = await fetch(`/api/owners/${ownerId}`).then(res => res.json())
+      contactNumber = userFound.contactNumber
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   const [mainColor] = useState<Color>(color);

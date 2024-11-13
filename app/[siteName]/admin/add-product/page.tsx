@@ -56,7 +56,7 @@ export default function AddProduct() {
     gradientBoxText: string[]
   }>();
   const [files, setFiles] = useState<File[]>([]);
-  const [tags, setTags] = useState<string[]>(["Populares","Exclusivos","Rentáveis","Imperdíveis"]);
+  const [tags, setTags] = useState<string[]>([]);
   const [newTag, setNewTag] = useState('');
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -352,17 +352,17 @@ export default function AddProduct() {
                   </div>
                 </article>
 
-                <p className="text-zinc-600 font-antom mt-2 px-2">
+                <p className="text-zinc-600 font-antom mt-2 px-2 break-words w-full h-full dark:text-zinc-300">
                   {productData.description}
                 </p>
 
                 <div className="mt-1 flex items-center text-zinc-400 font-antom tracking-tight gap-1 px-2">
                   <span className="font-montserrat">
                     <i className="bi bi-geo-alt"></i>
-                    Brazil
+                     Brasil
                   </span>
                   <span className="font-montserrat">•</span>
-                  <span className="font-montserrat">05/09/2024</span>
+                  <span className="font-montserrat">XX/XX/2024</span>
                 </div>
                   
                 <div className="m-2">

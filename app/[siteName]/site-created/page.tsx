@@ -11,40 +11,40 @@ export default function SiteCreated() {
   const { siteName } = useParams();
   const [siteResponse, setSiteResponse] = useState<{name: string, color: Color, icon: string}>();
   const router = useRouter();
-  // const [isClipboardSupported, setIsClipboardSupported] = useState(false);
-  // const [isShareSupported, setIsShareSupported] = useState(false);
-  // const [copied, setCopied] = useState(false);
+  const [isClipboardSupported, setIsClipboardSupported] = useState(false);
+  const [isShareSupported, setIsShareSupported] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  // useEffect(() => {
-  //   if (typeof window !== 'undefined') {
-  //     setIsClipboardSupported(!!navigator.clipboard);
-  //     setIsShareSupported(!!navigator.share);
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setIsClipboardSupported(!!navigator.clipboard);
+      setIsShareSupported(!!navigator.share);
+    }
+  }, []);
 
   const handleShare = async () => {
-    // if (isShareSupported) {
-    //   try {
-    //     await navigator.share({ title: 'Compartilhe este link', url: `/${siteName}` });
-    //   } catch (error) {
-    //     console.error('Erro ao compartilhar:', error);
-    //   }
-    // } else {
-    //   handleCopyToClipboard();
-    // }
+    if (isShareSupported) {
+      try {
+        await navigator.share({ title: 'Compartilhe este link', url: `/${siteName}` });
+      } catch (error) {
+        console.error('Erro ao compartilhar:', error);
+      }
+    } else {
+      handleCopyToClipboard();
+    }
     console.log("to-Do: implement share feature")
   };
 
-  // const handleCopyToClipboard = () => {
-  //   if (isClipboardSupported) {
-  //     navigator.clipboard.writeText(`/${siteName}`).then(() => {
-  //       setCopied(true);
-  //       setTimeout(() => setCopied(false), 2000);
-  //     });
-  //   } else {
-  //     console.error('API Clipboard não suportada no navegador.');
-  //   }
-  // };
+  const handleCopyToClipboard = () => {
+    if (isClipboardSupported) {
+      navigator.clipboard.writeText(`/${siteName}`).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      });
+    } else {
+      console.error('API Clipboard não suportada no navegador.');
+    }
+  };
 
   useEffect(() => {
     getSite();
@@ -68,8 +68,6 @@ export default function SiteCreated() {
 
       const siteResponse = await response.json();
       setSiteResponse(siteResponse);
-      console.log(siteResponse);
-      console.log(JSON.stringify(response))
     } catch (err: unknown) {
       if (err instanceof Error) {
         console.error(err.message);
@@ -81,11 +79,11 @@ export default function SiteCreated() {
 
   if (siteResponse) {
     return (
-      <main className="w-[80vw] max-w-[1000px] m-auto mt-[20vw] flex flex-col px-2 rounded-xl gap-4 justify-center items-center py-4">
+      <main className="w-[80vw] max-w-[1000px] m-auto mt-[20vh] flex flex-col px-2 rounded-xl gap-4 justify-center items-center py-4">
         <Logo pageName={siteResponse.name} color={siteResponse.color} icon={siteResponse.icon} lg={true} />
         <h1 className="text-xl"><span className={`text-${siteResponse.color}-500 font-medium`}>Parabéns!</span> seu site foi criado com sucesso.</h1>
         <button className={`rounded bg-${siteResponse.color}-500 h-10 py-1 font-medium text-white curso-pointer transition hover:bg-${siteResponse.color}-400 w-[250px]`} onClick={() => router.push(`/${siteName}`)}>Ver como ficou</button>
-        <button className={`rounded bg-${siteResponse.color}-500 h-10 py-1 font-medium text-white transition hover:bg-${siteResponse.color}-400 w-[250px]`} onClick={() => router.push(`/${siteName}/admin/add-product`)}>Adicionar produto</button>
+        <button className={`rounded bg-${siteResponse.color}-500 h-10 py-1 font-medium text-white transition hover:bg-${siteResponse.color}-400 w-[250px]`} onClick={() => router.push(`/${siteName}/admin/add-product`)}>Adicionar produtos</button>
 
         <div className="flex justify-evenly w-[40vw] max-w-[250px] text-white lg:hidden">
           <button className={`rounded bg-zinc-800 border-2 w-10 h-10 border-zinc-700 py-1 font-medium transition hover:bg-${siteResponse.color}-500 hover:border-none`} onClick={() => router.push("/dashboard")}><i className="bi bi-house"></i></button>

@@ -4,15 +4,16 @@ import { PrismaClient, Prisma } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export async function GET(
-  req: Request
+  req: Request, {params}: { params: {ownerId: string} }
 ) {
-  const { searchParams } = new URL(req.url);
-  const ownerId = searchParams.get('ownerId');
+  const { ownerId } = params 
 
-  if (!ownerId || ownerId.length !== 24 || !/^[a-f0-9]{24}$/i.test(ownerId)) {
+  console.log(ownerId)
+
+  if (!ownerId) {
     return NextResponse.json(
       {
-        error: 'Invalid ID format. The provided ID must be a 24-character hexadecimal string.',
+        error: 'Invalid ID.',
       },
       { status: 400 }
     );

@@ -1,11 +1,9 @@
 'use client';
 
-// import Card from "@/components/Card/ExampleCard";
 import Footer from "@/components/Footer/Footer";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import GradientBox from "@/components/GradientBox/GradientBox";
-// import ExampleHeader from "@/components/Header/ExampleHeader";
 import ScrollButton from "@/components/Buttons/ScrollButton";
 import ExampleCard from "@/components/Card/ExampleCard";
 import { getCookie } from "typescript-cookie";
@@ -58,7 +56,6 @@ export default function Example() {
   const [topHeaderText] = useState("30% de desconto para novos usuários")
   const [useGradientBox] = useState(true);
   const [gradientBoxText] = useState(["Até 70% de desconto", "Promoção de verão"])
-  // const [useTags, setUseTags] = useState(true);
   const [tags] = useState<string[]>(["Populares","Exclusivos","Rentáveis","Imperdíveis"]);
   const [mainColor] = useState<Color>(color);
   const [atk, setAtk] = useState<string | undefined>()
@@ -119,7 +116,7 @@ export default function Example() {
 
       <main className="mt-[115px] w-[80vw] m-auto flex flex-col max-w-[1000px]">
         
-        <article className="mt-[35px] w-[75vw] m-auto flex flex-col max-w-[1000px] px-1">
+        <article className="mt-[35px] w-full m-auto flex flex-col max-w-[1000px] px-1">
             
             {
               useGradientBox == true
@@ -129,7 +126,7 @@ export default function Example() {
             }
             
 
-            <div className="w-[74vw] max-w-[985px] h-full m-auto mt-[25px] flex justify-between cursor-pointer font-montserrat font-bold text-xs tracking-tight gap-2 overflow-hidden sm:text-[14px]">
+            <div className="w-full max-w-[1000px] h-full m-auto mt-[25px] flex justify-between cursor-pointer font-montserrat font-bold text-xs tracking-tight gap-2 overflow-hidden sm:text-[14px]">
               <div className="w-full max-w-[80vw] h-full m-auto flex justify-between cursor-pointer font-montserrat font-bold text-xs tracking-tight gap-2 overflow-hidden sm:text-[14px]">
                     <div className="flex gap-2">
                         {tags.map((tag, index) => (
@@ -138,11 +135,11 @@ export default function Example() {
                           </button>
                         ))}
                     </div>
-
                 </div>
+                
 
-              <button className="py-1 px-3 rounded-full border-2 border-zinc-300 text-zinc-400 flex transition hover:bg-black hover:text-white hover:border-black">
-                ordenar <i className="bi bi-chevron-down ml-1"></i>
+              <button className="py-1 px-2 rounded-full border-2 border-zinc-300 text-zinc-400 flex hidden transition hover:bg-black hover:text-white hover:border-black md:block">
+                <i className="bi bi-chevron-down"></i>
               </button>
             </div>
           </article>
@@ -150,10 +147,14 @@ export default function Example() {
         <h1 className="w-full m-auto mt-[20px] font-bold font-antom tracking-tighter text-2xl">Novos produtos</h1>
 
         <section className="w-full m-auto mt-[20px] grid grid-cols-2 gap-[1vw] justify-center items-center md:grid-cols-3 lg:grid-cols-4">
-          <ExampleCard mainColor={mainColor} pageName={name} icon={icon} />
-          <ExampleCard mainColor={mainColor} pageName={name} icon={icon} />
-          <ExampleCard mainColor={mainColor} pageName={name} icon={icon} />
-          <ExampleCard mainColor={mainColor} pageName={name} icon={icon} />
+          <ExampleCard mainColor={mainColor} pageName={name} icon={icon} exampleImgName={"dunk"} />
+          <ExampleCard mainColor={mainColor} pageName={name} icon={icon} exampleImgName={"guitar"} />
+          <ExampleCard mainColor={mainColor} pageName={name} icon={icon} exampleImgName={"car"} />
+          <ExampleCard mainColor={mainColor} pageName={name} icon={icon} exampleImgName={"pc"} />
+          <ExampleCard mainColor={mainColor} pageName={name} icon={icon} exampleImgName={"dunk"} />
+          <ExampleCard mainColor={mainColor} pageName={name} icon={icon} exampleImgName={"guitar"} />
+          <ExampleCard mainColor={mainColor} pageName={name} icon={icon} exampleImgName={"car"} />
+          <ExampleCard mainColor={mainColor} pageName={name} icon={icon} exampleImgName={"pc"} />
         </section>
 
         <button className={`h-[7vh] w-full flex justify-center items-center gap-1 text-sm ${colorClasses[mainColor].text} transition hover:text-${mainColor}-400 mt-[1vh] lg:text-[16px]`}>

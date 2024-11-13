@@ -12,7 +12,7 @@ model Owner {
   name      String
   email     String   @unique
   password  String
-  phone     String?
+  contactNumber Int
   sites     Site[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

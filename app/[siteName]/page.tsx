@@ -139,7 +139,7 @@ const HomePage = () => {
                   <section className="w-full m-auto mt-[20px] grid grid-cols-2 gap-[1vw] justify-center items-center md:grid-cols-3 lg:grid-cols-4">
                     {
                       siteResponse.products.map((item) => {
-                        return <Card itemId={"1"} mainColor={siteResponse.color} pageName={siteResponse.name} icon={siteResponse.icon} key={item.id} name={item.name} imageUrl={item.imageUrl} createdAt={item.createdAt}  />
+                        return <Card itemId={"1"} mainColor={siteResponse.color} pageName={siteResponse.name} icon={siteResponse.icon} key={item.id} name={item.name} price={item.price} imageUrl={item.imageUrl} createdAt={item.createdAt}  />
                       })
                     }
                     

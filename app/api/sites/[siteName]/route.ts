@@ -16,13 +16,14 @@ export async function GET(req: Request, { params }: { params: { siteName: string
         name: siteName
       },
       include: {
-        products: true
+        products: true,
+        owner: true
       }
     })
     
     if (!response) return NextResponse.json({message: "Site not found"}, {status: 404});
 
-    return NextResponse.json(response, {status: 200});
+    return NextResponse.json({ ...response, owner: {contactNumber: response.owner.contactNumber} }, {status: 200});
   } catch (err) {
     if (err instanceof Error) {
       return NextResponse.json({ message: err.message }, { status: 500 });

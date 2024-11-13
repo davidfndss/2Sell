@@ -31,7 +31,7 @@ const colorClasses: Record<Color, { text: string; hover: string }> = {
   },
 };
 
-export default function Footer(props: { pageName: string | null; color: Color | null; icon: string | null; }) {
+export default function Footer(props: { pageName: string | null; color: Color | null; icon: string | null; contactNumber: number}) {
   const mainColor = props.color || 'green'; 
 
   return (
@@ -44,25 +44,11 @@ export default function Footer(props: { pageName: string | null; color: Color | 
         <span className="text-sm text-slate-600 font-montserrat tracking-tighter font-medium">Entre em contato</span>
         <div className={`flex gap-2 ${colorClasses[mainColor].text} text-[14px] font-medium`}>
           <a 
-            href="https://api.whatsapp.com/send/?phone=61985391185&text&type=phone_number&app_absent=0&text=Olá" 
-            target="_blank" 
+            href={`https://api.whatsapp.com/send/?phone=${props.contactNumber}&text&type=phone_number&app_absent=0&text=Olá" 
+            target="_blank`} 
             className={`cursor-pointer transition ${colorClasses[mainColor].hover}`}
           >
-            Whatsapp
-          </a>
-          <a 
-            href="https://github.com/davidfndss" 
-            target="_blank" 
-            className={`cursor-pointer transition ${colorClasses[mainColor].hover}`}
-          >
-            Github
-          </a>
-          <a 
-            href="https://linkedin.com/in/davidfndss" 
-            target="_blank" 
-            className={`cursor-pointer transition ${colorClasses[mainColor].hover}`}
-          >
-            Linkedin
+            <i className="bi bi-whatsapp"></i> Whatsapp
           </a>
         </div>
       </div>
