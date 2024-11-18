@@ -44,8 +44,8 @@ export default function Footer(props: { pageName: string | null; color: Color | 
         <span className="text-sm text-slate-600 font-montserrat tracking-tighter font-medium">Entre em contato</span>
         <div className={`flex gap-2 ${colorClasses[mainColor].text} text-[14px] font-medium`}>
           <a 
-            href={`https://api.whatsapp.com/send/?phone=${props.contactNumber}&text&type=phone_number&app_absent=0&text=Olá" 
-            target="_blank`} 
+            href={`https://api.whatsapp.com/send/?phone=${props.contactNumber}&text&type=phone_number&app_absent=0&text=Olá`} 
+             target="_blank" 
             className={`cursor-pointer transition ${colorClasses[mainColor].hover}`}
           >
             <i className="bi bi-whatsapp"></i> Whatsapp

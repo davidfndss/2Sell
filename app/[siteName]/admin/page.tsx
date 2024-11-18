@@ -136,7 +136,7 @@ const HomePageAdmin = () => {
                   ))}
                 </div>
                 <button className="py-1 px-3 rounded-full border-2 border-zinc-300 text-zinc-400 flex transition hover:bg-black hover:text-white hover:border-black">
-                  ordenar <i className="bi bi-chevron-down ml-1"></i>
+                  <i className="bi bi-chevron-down"></i>
                 </button>
               </div>
             )}

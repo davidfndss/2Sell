@@ -18,15 +18,15 @@ export default function ExampleCard(props: {mainColor: string | null, pageName: 
           </div>
         </div>
 
-        <span className="font-montserrat font-medium mt-1 block">Item 1</span>
+        <span className="font-montserrat font-medium mt-1 block">Exemplo</span>
 
         <div className="mt-1 flex items-center gap-1">
           <span className="font-montserrat text-sm">
             <i className="bi bi-geo-alt"></i>
-            Brazil
+            Brasil
           </span>
           <span className="font-montserrat text-sm">•</span>
-          <span className="font-montserrat text-sm">hoje, 14:04</span>
+          <span className="font-montserrat text-sm">Hoje</span>
         </div>
     </Link>
   );

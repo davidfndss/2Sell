@@ -10,6 +10,7 @@ import Logo from "@/components/Logo/Logo";
 import FileDragAndDropArea from "@/components/FileDragAndDropArea/FileDragAndDropArea";
 import { LoadingScreen } from "@/components/Loading/LoadingScreen";
 import { supabase } from '../../../../utils/supabaseClient';
+import { formatPrice } from "@/utils/minor-functions";
 
 type Color = "green" | "blue" | "purple" | "red" | "orange" | "yellow";
 
@@ -111,7 +112,6 @@ export default function AddProduct() {
     });
   };
 
-
   const uploadImagesAndGetUrls = async (files: File[]): Promise<string[]> => {
     const urls: string[] = [];
     console.log(files)
@@ -139,7 +139,6 @@ export default function AddProduct() {
     console.log(urls)
     return urls;
   };
-
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -174,19 +173,12 @@ export default function AddProduct() {
     }
   };
 
-
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % files.length);
   };
 
   const prevImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex - 1 + files.length) % files.length);
-  };
-
-  const formatPrice = (value: string) => {
-    if (!value) return 'R$ 0,00';
-    const numero = Number(value.replace(',', '.'));
-    return `R$ ${numero.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
   };
 
   const addTag = () => {
@@ -200,7 +192,6 @@ export default function AddProduct() {
   const removeTag = (tagToRemove: string) => {
     setTags(tags.filter(tag => tag !== tagToRemove));
   };
-
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {

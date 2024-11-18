@@ -7,8 +7,7 @@ import Header from "@/components/Header/Header";
 import { LoadingScreen } from "@/components/Loading/LoadingScreen";
 import { useParams, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-
-type Color = "green" | "blue" | "purple" | "red" | "orange" | "yellow";
+import { Color, Site } from "../types";
 
 const colorClasses: Record<Color, { bg: string; text: string; hover: string }> = {
   green: {
@@ -45,24 +44,7 @@ const colorClasses: Record<Color, { bg: string; text: string; hover: string }> =
 
 const HomePage = () => {
   const { siteName } = useParams();
-  const [siteResponse, setSiteResponse] = useState<{
-    name: string, 
-    color: Color, 
-    icon: string,
-    products: {
-      id: string,
-      name: string,
-      price: number,
-      description: string,
-      imageUrl: string[],
-      createdAt: Date 
-    }[], 
-    useTopHeader: boolean, 
-    useGradientBox: boolean, 
-    useTags: boolean, 
-    tags: string[], 
-    topHeaderText: string, 
-    gradientBoxText: string[]}>();
+  const [siteResponse, setSiteResponse] = useState<Site>();
 
   const router = useRouter()
 
@@ -122,7 +104,7 @@ const HomePage = () => {
                   </div>
 
                   <button className="py-1 px-3 rounded-full border-2 border-zinc-300 text-zinc-400 flex transition hover:bg-black hover:text-white hover:border-black">
-                    ordenar <i className="bi bi-chevron-down ml-1"></i>
+                    <i className="bi bi-chevron-down"></i>
                   </button>
                 </div>
               ) 
@@ -164,7 +146,7 @@ const HomePage = () => {
         </main>
           
 
-        <Footer pageName={siteResponse.name} color={siteResponse.color} icon={siteResponse.icon} />
+        <Footer pageName={siteResponse.name} color={siteResponse.color} icon={siteResponse.icon} contactNumber={siteResponse.owner.contactNumber} />
       </>
     )
   } else {

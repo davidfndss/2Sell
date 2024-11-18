@@ -107,7 +107,7 @@ export default function Example() {
                         </button>
                     </div>
 
-                    <div className="flex gap-3 text-lg gap-[3vw] items-center w-[20vw] max-w-[200px] justify-end">
+                    <div className="flex text-lg items-center w-[20vw] max-w-[200px] justify-end">
                         <ThemeSwitchBtn color={mainColor} />
                     </div>
                 </div>
@@ -144,9 +144,9 @@ export default function Example() {
             </div>
           </article>
 
-        <h1 className="w-full m-auto mt-[20px] font-bold font-antom tracking-tighter text-2xl">Novos produtos</h1>
+        <h1 className="w-full m-auto mt-[20px] max-w-[1000px] px-1 font-bold font-antom tracking-tighter text-2xl">Novos produtos</h1>
 
-        <section className="w-full m-auto mt-[20px] grid grid-cols-2 gap-[1vw] justify-center items-center md:grid-cols-3 lg:grid-cols-4">
+        <section className="w-full m-auto mt-[20px] max-w-[1000px] px-1 grid grid-cols-2 gap-[1vw] justify-center items-center md:grid-cols-3 lg:grid-cols-4">
           <ExampleCard mainColor={mainColor} pageName={name} icon={icon} exampleImgName={"dunk"} />
           <ExampleCard mainColor={mainColor} pageName={name} icon={icon} exampleImgName={"guitar"} />
           <ExampleCard mainColor={mainColor} pageName={name} icon={icon} exampleImgName={"car"} />
@@ -164,9 +164,6 @@ export default function Example() {
       </main>
 
       <ScrollButton mainColor={mainColor} />
-
-
-      <Footer pageName={name} color={mainColor} icon={icon} />
 
 
       <div className="m-auto w-[80vw] max-w-[1000px] mt-[20px] mb-[10px]">

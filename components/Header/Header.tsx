@@ -80,17 +80,11 @@ export default function Header(props: {mainColor: Color, icon: string | null, pa
                         </button>
                     </div>
 
-                    <div className="flex gap-3 text-lg gap-[3vw] items-center w-[20vw] max-w-[200px] justify-end">
-
+                    <div className="flex text-lg gap-6 items-center w-[20vw] max-w-[200px] justify-end md:gap-[3vw]">
                         <nav className="font-antom flex items-center cursor-pointer w-[25px]">
                             <i className={`bi bi-cart-fill text-2xl transition hover:text-${props.mainColor}-500 dark:hover:text-${props.mainColor}-400`}></i>
                             <i className={`bi bi-circle-fill text-[9px] ${colorClasses[props.mainColor].text} relative right-[7px] bottom-[9px]`}></i>
                         </nav>
-                        <nav className="font-antom flex items-center cursor-pointer">
-                            <i className={`bi bi-person-fill text-2xl transition hover:text-${props.mainColor}-400 dark:hover:text-${props.mainColor}-400`}></i>
-                        </nav>
-
-                        
 
                         <ThemeSwitchBtn color={props.mainColor} />
                     </div>

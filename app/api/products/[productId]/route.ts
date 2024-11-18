@@ -3,12 +3,10 @@ import { PrismaClient, Prisma } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function GET(
-  req: Request, {params}: { params: {ownerId: string} }
-) {
-  const { ownerId } = params 
+export async function GET(req: Request, {params}: { params: {productId: string} }) {
+  const { productId } = params 
 
-  if (!ownerId) {
+  if (!productId) {
     return NextResponse.json(
       {
         error: 'Invalid ID.',
@@ -18,16 +16,15 @@ export async function GET(
   }
 
   try {
-    const owner = await prisma.owner.findUnique({
-      where: { id: ownerId },
-      include: { sites: true }
+    const product = await prisma.product.findUnique({
+      where: { id: productId }
     });
 
-    if (!owner) {
-      return NextResponse.json({ error: 'Owner not found' }, { status: 404 });
+    if (!product) {
+      return NextResponse.json({ error: 'product not found' }, { status: 404 });
     }
 
-    return NextResponse.json(owner, { status: 200 });
+    return NextResponse.json(product, { status: 200 });
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === 'P2023') {

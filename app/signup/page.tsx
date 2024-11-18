@@ -47,6 +47,13 @@ const colorClasses: Record<Color, { bg: string; text: string; hover: string; foc
   },
 };
 
+interface Owner {
+  name: string;
+  email: string; 
+  password: string;
+  contactNumber: string
+}
+
 const Signup = () => {
   const searchParams = useSearchParams();
   
@@ -55,9 +62,9 @@ const Signup = () => {
   const icon = searchParams.get("icon");
   const [mainColor] = useState<Color>(color);
 
-  const [ownerData, setOwnerData] = useState({ name: '', email: '', password: '', phone: '' });
+  const [ownerData, setOwnerData] = useState<Owner>({ name: '', email: '', password: '', contactNumber: '' });
   
-  const [ownerCreateErrorResponseMessage, setOwnerCreateErrorResponseMessage] = useState('');
+  const [ownerCreateError, setOwnerCreateError] = useState<string>('');
 
   const router = useRouter();
 
@@ -88,28 +95,63 @@ const Signup = () => {
         setCookie("atk", result.atk, { expires: 1 })
         router.push( name && color && icon ? `/final-steps?name=${name}&color=${color}&icon=${icon}` : `/dashboard`)
       } else {
-        setOwnerCreateErrorResponseMessage(errorMessage || 'Erro ao criar usuário');
+        setOwnerCreateError(errorMessage || 'Erro ao criar usuário');
       }
 
     } catch (error) {
 
       if (error instanceof ZodError) {
-        setOwnerCreateErrorResponseMessage(error.issues.map(err => err.message).toString()); 
+        setOwnerCreateError(error.issues.map(err => err.message).join(", ")); 
+        return
       } else {
-        setOwnerCreateErrorResponseMessage('Erro ao criar usuário');
+        setOwnerCreateError('Erro ao criar usuário');
       }
       
       if (error instanceof Error) {
-        setOwnerCreateErrorResponseMessage(`${error.message}`);
+        setOwnerCreateError(`${error.message}`);
       } else {
-        setOwnerCreateErrorResponseMessage('Erro ao criar usuário');
+        setOwnerCreateError('Erro ao criar usuário');
+      }
+    }
+  };
+
+  const signupAsTesterOwner = async () => {
+    try {
+      const response = await fetch('/api/owners/tester', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      const result = await response.json();
+  
+      const errorMessage = errorMessages[result.message as keyof typeof errorMessages] || result.message;
+  
+      if (response.ok && result.atk) {
+        setCookie("atk", result.atk, { expires: 1 })
+        router.push( name && color && icon ? `/final-steps?name=${name}&color=${color}&icon=${icon}` : `/dashboard`)
+      } else {
+        setOwnerCreateError(errorMessage || 'Erro ao criar usuário');
+      }
+
+    } catch (error) {
+
+      if (error instanceof ZodError) {
+        setOwnerCreateError(error.issues.map(err => err.message).join(", ")); 
+        return
+      } else {
+        setOwnerCreateError('Erro ao criar usuário');
+      }
+      
+      if (error instanceof Error) {
+        setOwnerCreateError(`${error.message}`);
+      } else {
+        setOwnerCreateError('Erro ao criar usuário');
       }
     }
   };
 
   return (
     <>
-      <main className="flex flex-col items-center p-5 min-h-screen mt-[80px] w-[80vw] max-w-[500px] m-auto">
+      <main className="flex flex-col items-center p-5 min-h-screen mt-[40px] w-[80vw] max-w-[500px] m-auto">
         <article className="mt-[20px] mb-[10px] flex flex-col gap-2">
           <div className="flex items-center ml-[-10px]">
             <i className={`bi bi-plus text-${mainColor}-500 text-3xl`}></i>
@@ -163,13 +205,13 @@ const Signup = () => {
               />
             </div>
             <div className="flex flex-col justify-center items-start gap-2">
-              <label htmlFor="phone">Número para contato:</label>
+              <label htmlFor="contactNumber">Número para contato:</label>
               <div className="flex gap-2 items-center w-full">
                 <i className="bi bi-whatsapp text-green-500 text-3xl w-[80px] text-center"></i>
                 <input 
                   type="text" 
-                  id="phone" 
-                  name="phone" 
+                  id="contactNumber" 
+                  name="contactNumber" 
                   onChange={handleOwnerChange} 
                   required 
                   className={`w-full p-2 rounded bg-zinc-100 border dark:bg-zinc-900 dark:border-zinc-800 ${colorClasses[mainColor].focus}`} 
@@ -177,7 +219,7 @@ const Signup = () => {
               </div>
              
               <p className="text-zinc-700 dark:text-zinc-500 text-sm">Nós da 2sell não entraremos em contato com você pelo seu número, apenas seus clientes.</p>
-              {ownerCreateErrorResponseMessage && <p className="text-red-500">{ownerCreateErrorResponseMessage}</p>}
+              {ownerCreateError && <p className="text-red-500">{ownerCreateError}</p>}
             </div>
             <button 
               type="submit" 
@@ -191,6 +233,10 @@ const Signup = () => {
           </p>
         </div>
       </main>
+      <div className="border rounded fixed right-[15px] bottom-[15px] bg-zinc-100 border-zinc-200 p-2 dark:border-zinc-800 flex flex-col gap-1 dark:gap-2 items-center dark:bg-[#151515]">
+        <p className="text-zinc-600 text-sm dark:text-zinc-400 text-center">Não deseja criar uma conta?</p>
+        <span className={`text-${mainColor}-500 cursor-pointer transition ml-1 bg-zinc-100 font-bold dark:bg-zinc-950 rounded hover:text-green-400 dark:text-zinc-200 dark:hover:text-green-500 dark:py-1 dark:px-2`} onClick={signupAsTesterOwner}>Entrar como tester</span>
+      </div>
     </>
   );
 };
