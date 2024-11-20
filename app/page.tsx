@@ -43,17 +43,13 @@ export default function Home() {
 
       <img
         className="absolute min-w-[700px] top-[80vh] right-[15vw] md:max-w-[80vw] md:right-[10vw]"
-        src="/images/responsive-mock.png"
+        src="/images/responsive-mock-dark.png"
       ></img>
 
 
       <div className="absolute z-[-10] w-full max-w-[90vw] left-[10vw] top-[5vh] hidden dark:flex overflow-hidden">
         <img src="/images/gradient-background.png" className="min-w-[1000px] max-h-[900px] relative md:min-w-[1000px] md:max-h-[1000px] md:left-[10vw] lg:w-[1300px] lg:h-[1300px] lg:left-[35vw] z-[-11]"></img>
       </div>
-
-      {/* <img src="/images/gradient-background.png" className="min-w-[1000px] max-h-[900px] absolute z-[-10] left-[10vw] top-[5vh] hidden md:min-w-[1000px] md:max-h-[1000px] md:left-[10vw] lg:w-[1300px] lg:h-[1300px] lg:left-[35vw] border dark:flex"></img> */}
-      
-      {/* <div className="w-[1000px] h-[1000px] absolute z-[-10] left-[10vw] top-[5vh] hidden md:min-w-[1000px] md:max-h-[1000px] md:left-[10vw] lg:w-[1300px] lg:h-[1300px] lg:left-[35vw] dark:block" style={{backgroundImage: 'url("/images/gradient-background.png")', backgroundSize: "cover", backgroundRepeat: "no-repeat" }}></div> */}
      
 
       <main className="w-[80vw] h-full m-auto max-w-[1000px] overflow-hidden">

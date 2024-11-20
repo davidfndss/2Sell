@@ -114,7 +114,6 @@ export default function AddProduct() {
 
   const uploadImagesAndGetUrls = async (files: File[]): Promise<string[]> => {
     const urls: string[] = [];
-    console.log(files)
     for (const file of files) {
         const { data, error } = await supabase.storage
             .from("product-images")
@@ -133,7 +132,6 @@ export default function AddProduct() {
         } catch (err) {
           console.error(err)
         }
-
         
     }
     console.log(urls)
@@ -195,6 +193,7 @@ export default function AddProduct() {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
+      e.preventDefault()
       addTag();
     }
   };
