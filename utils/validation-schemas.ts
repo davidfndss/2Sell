@@ -5,7 +5,7 @@ export const ownerSchema = z.object({
   email: z.string().email('Endereço de e-mail inválido'),
   password: z.string()
     .regex(/^(?=.*[0-9])(?=.*[!@#$%^&*]).{6,}$/, 'A senha deve ter pelo menos 6 caracteres, conter um número e um caractere especial'),
-  contactNumber: z.string().optional(),
+  contactNumber: z.number(),
 });
 
 export const SigninSchema = z.object({

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { Owner, PrismaClient } from '@prisma/client';
 import { ownerSchema } from '../../../utils/validation-schemas';
 import { z } from 'zod';
 import jwt from "jsonwebtoken"
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
     if (foundUser) return NextResponse.json({message: "E-mail already registered"},{status: 400})
 
     const hashedPassword = await bcrypt.hash(body.password, 7)
-    const newOwner = await prisma.owner.create({
+    const newOwner: Owner = await prisma.owner.create({
       data: {...validatedOwner, password: hashedPassword },
     });
 

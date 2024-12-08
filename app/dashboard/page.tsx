@@ -63,7 +63,8 @@ const Dashboard = () => {
       const atk = getCookie("atk");
 
       if (!atk) {
-        throw new Error("Token não encontrado. Faça login novamente.");
+        setError({message: "Token não encontrado, Faça login novamente."});
+        throw new Error("Token não encontrado, Faça login novamente.")
       }
 
       const decoded = jwt.decode(atk);
@@ -113,6 +114,7 @@ const Dashboard = () => {
           <section className="flex w-full h-full flex-col gap-4 justify-center items-center text-red-500">
               <i className="bi bi-x-circle-fill text-5xl"></i>
               <p className="text-red-500 text-xl">Erro: {error.message}</p>
+              <button className="border border-green-500 px-4 py-1 rounded font-bold transition dark:border-zinc-500 dark:text-zinc-500 dark:hover:border-zinc-400 dark:hover:text-zinc-400" onClick={() => router.push("/signin")}>Login</button>
           </section>
           
         ) : !user ? (

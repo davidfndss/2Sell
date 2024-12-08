@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <>
       <header className={`flex items-center justify-center  bg-white z-10 fixed w-screen top-0 transition ${ isScrolled ? "dark:bg-black h-[70px] dark:shadow-[0_4px_16px_0px_rgba(0,0,0,0.5)]" : "dark:bg-[#151515] h-[80px]"}`}>
-          <article className="w-[80%] h-full flex flex items-center justify-between max-w-[1000px] mr-[15px]">
+          <article className="w-[80%] h-full flex items-center justify-between max-w-[1000px] mr-[15px]">
               <TwoSellLogo />
 
               <div className="flex gap-4 items-center">
@@ -111,7 +111,7 @@ export default function Home() {
             </div>
           </article>
 
-          <article className="flex flex-col justify-center items-center gap-4 md:mr-[10vw]">
+          <article className="flex flex-col w-full justify-center items-center gap-4 md:mr-[10vw]">
             <div
               className="bg-green-100 h-[180px] w-[180px] rounded-lg flex justify-center items-center border border-green-300 mt-[20vh] cursor-pointer transition text-green-500 hover:bg-green-50 hover:text-green-400 hover:border-2 lg:mt-0 dark:bg-zinc-800 dark:border-zinc-700"
               onClick={() => router.push("/create")}

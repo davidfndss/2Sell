@@ -170,8 +170,8 @@ const HomePageAdmin = () => {
       ) : (
         <>
           <TwoSellHeader />
-          <section className="mt-[20vh] w-[80vw] m-auto flex flex-col items-center">
-            <h1 className="text-2xl text-zinc-300 tracking-tight font-medium">Você precisa ter permissão de um administrador para acessar esse site...</h1>
+          <section className="w-[80vw] h-screen m-auto flex flex-col items-center justify-center">
+            <h1 className="text-2xl text-zinc-500 tracking-tight font-medium dark:text-zinc-300">Você precisa ter permissão de um administrador para acessar esse site...</h1>
             <CTAButton content={"Fazer login"} route={"/signin"} />
           </section>
         </>

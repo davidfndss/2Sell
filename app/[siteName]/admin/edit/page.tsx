@@ -81,6 +81,7 @@ export default function EcommerceEdit() {
     const [useTags, setUseTags] = useState(true);
     const [tags, setTags] = useState<string[]>(["Populares","Exclusivos","Rentáveis","Imperdíveis"]);
     const [newTag, setNewTag] = useState('');
+    const [isScrolled, setIsScrolled] = useState(false);
 
 
     const getSite = async () => {
@@ -128,8 +129,16 @@ export default function EcommerceEdit() {
     
     useEffect(() => {
         getSite()
+
+        const handleScroll = () => {
+          setIsScrolled(window.scrollY > 0);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
     }, [])
   
+
+
     const renderIcon = (iconName: string, iconClass: string) => {
       return (
         <i
@@ -226,9 +235,25 @@ export default function EcommerceEdit() {
   if (siteResponse) {
     return (
       <>
-        <div className="w-full fixed top-0 p-6 bg-white dark:bg-black">
-          <h1 className="text-4xl font-black italic"><span className={`${colorClasses[mainColor].text}`}><i className="bi bi-pencil-fill"></i> </span>Edição</h1>
-        </div>
+        
+      
+        <header className={`flex items-center justify-center  bg-white z-10 fixed w-screen top-0 transition ${ isScrolled ? "dark:bg-black h-[70px] dark:shadow-[0_4px_16px_0px_rgba(0,0,0,0.5)]" : "dark:bg-[#151515] h-[80px]"}`}>
+          <article className="w-[80%] h-full flex items-center justify-between max-w-[1000px] mr-[15px]">
+              <h1 className="text-4xl font-black italic"><span className={`${colorClasses[mainColor].text}`}><i className="bi bi-pencil-fill"></i> </span>Edição</h1>
+
+              <div className="flex gap-4 items-center">
+              
+                <nav className="rounded py-2 px-6 border text-green-500 border-green-500 transition cursor-pointer hover:border-green-500 dark:border-zinc-700 dark:text-white dark:hover:text-green-500 dark:hover:border-green-500" onClick={() => router.push("signin") }>
+                  Dashboard
+                </nav>
+                <nav className="rounded py-2 px-6 border bg-green-500 text-white transition cursor-pointer  hover:bg-green-400 dark:hover:bg-green-500 dark:border-zinc-600 dark:bg-zinc-600" onClick={() => router.push("signup") }>
+                  Voltar
+                </nav>
+                
+              </div>
+          </article>
+      </header>
+
         <main className="mt-[10vh] w-[80vw] max-w-[1000px] m-auto flex flex-col lg:flex-row">            
           <form className="flex flex-col justify-center items-start gap-4">
             <div className="mt-[40px]">
